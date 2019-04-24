@@ -7,30 +7,75 @@ import (
 	"strings"
 )
 
-func tele2(phone string) {
+func newTicket(phone string) {
+
+	//POST queue/admin/tickets/new
 	// Set variable values
-	gatewayURL := "http://bsms-proxy.tele2.ru/api/"
-	login := "AUTH_API_KEY"
-	password := "PASS"
-	sender := "SEDEMO"
-	urlStr := gatewayURL + "api/?operation=send" +
-		"&login=" + "someLogin" +
-		"&password=" + "somePassword" +
-		"&msisdn=" + "79111234567" +
-		"&shortcode=" + "SomeSender" +
-		"&text=" + "TestMessage"
+	gatewayURL := "queue/admin/tickets/new"
+	ip := "192.168.10.176"
+	port := "5600"
+	urlStr := ip + port + gatewayURL
 
 	// Params
 	v := url.Values{}
-	v.Set("to", phone)
-	v.Set("login", login)
-	v.Set("password", password)
-	v.Set("sender", sender)
-	v.Set("message", "Hello, this is a test sms")
+	v.Set("ip", ip)
+	v.Set("port", port)
 	rb := *strings.NewReader(v.Encode())
 
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", urlStr, &rb)
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	// Make request
+	resp, _ := client.Do(req)
+
+	//print response
+	fmt.Println(resp.Status)
+
+}
+
+func serviceInTicket(phone string) {
+
+	// Set variable values
+	gatewayURL := "queue/admin/tickets/:ticketId/addProduct/:productId"
+	ip := "192.168.10.176"
+	port := "5600"
+	urlStr := ip + port + gatewayURL
+
+	// Params
+	v := url.Values{}
+	v.Set("ip", ip)
+	v.Set("port", port)
+	rb := *strings.NewReader(v.Encode())
+
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	// Make request
+	resp, _ := client.Do(req)
+
+	//print response
+	fmt.Println(resp.Status)
+
+}
+
+func cancelServiceTiket(phone string) {
+	//queue/admin/tickets/:ticketId/:ticketProductId/cancel
+	// Set variable values
+	gatewayURL := "queue/admin/tickets/:ticketId/:ticketProductId/cancel"
+	ip := "192.168.10.176"
+	port := "5600"
+	urlStr := ip + port + gatewayURL
+
+	// Params
+	v := url.Values{}
+	v.Set("ip", ip)
+	v.Set("port", port)
+	rb := *strings.NewReader(v.Encode())
+
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
 	// Make request
