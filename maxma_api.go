@@ -85,3 +85,108 @@ func cancelServiceTiket(phone string) {
 	fmt.Println(resp.Status)
 
 }
+
+func prioritetServiceTiket(phone string) {
+	//POST
+	//queue/admin/tickets/:ticketId/:ticketProductId/setPriority
+
+	// Set variable values
+
+}
+
+func returnOpertorList(phone string) {
+	//POST
+	//queue/admin/redirect/users/:productId
+
+	// Set variable values
+
+}
+
+func returnDesktop(phone string) {
+	//POST
+	//queue/admin/redirect/workPlaces/:productId
+
+	// Set variable values
+
+}
+
+func redirectUser(phone string) {
+	//POST
+	// queue/admin/redirect/:productId
+
+	// Set variable values
+
+}
+
+func getInfoTiket(phone string) {
+	//GET
+	//queue/admin/tickets/:ticketId
+
+	// Set variable values
+
+}
+
+func returnAllTiketsPredList(phone string) {
+	//GET
+	//queue/admin/booking
+
+	// Set variable values
+
+}
+
+func returnAllTikets(phone string) {
+	//GET
+	//queue/admin/tickets
+
+	// Set variable values
+
+}
+
+func returnTokenAuth(phone string) {
+	//POST
+	//queue/admin/login/:login/:password
+
+	// Set variable values
+
+}
+
+func getListService(phone string) {
+	//GET
+	//config/products
+
+	// Set variable values
+
+}
+
+func getListServiceAndCategory(phone string) {
+	//GET
+	//config/products/simple
+
+	// Set variable values
+
+}
+
+func selectMenuService(phone string) {
+	//GET
+	//config/menus
+
+	// Set variable values
+
+}
+
+func selectMenuServiceId(phone string) {
+	//tree service
+	//GET
+	//config/menus/:menuId
+
+	// Set variable values
+
+}
+
+func returnTimeService(phone string) {
+	//GET
+	// queue/awaiting
+
+	// Set variable values
+
+}
