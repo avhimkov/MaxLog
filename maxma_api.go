@@ -7,13 +7,11 @@ import (
 	"strings"
 )
 
-func newTicket(phone string) {
+func newTicket(ip string, port string) {
 
 	//POST queue/admin/tickets/new
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/new"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -34,12 +32,10 @@ func newTicket(phone string) {
 
 }
 
-func serviceInTicket(phone string) {
+func serviceInTicket(ip string, port string) {
 
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId/addProduct/:productId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -60,12 +56,10 @@ func serviceInTicket(phone string) {
 
 }
 
-func cancelServiceTiket(phone string) {
+func cancelServiceTiket(ip string, port string) {
 	//queue/admin/tickets/:ticketId/:ticketProductId/cancel
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId/:ticketProductId/cancel"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -86,14 +80,12 @@ func cancelServiceTiket(phone string) {
 
 }
 
-func prioritetServiceTiket(phone string) {
+func prioritetServiceTiket(ip string, port string) {
 	//POST
 	//queue/admin/tickets/:ticketId/:ticketProductId/setPriority
 
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId/:ticketProductId/setPriority"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -114,14 +106,12 @@ func prioritetServiceTiket(phone string) {
 
 }
 
-func returnOpertorList(phone string) {
+func returnOpertorList(ip string, port string) {
 	//POST
 	//queue/admin/redirect/users/:productId
 
 	// Set variable values
 	gatewayURL := "queue/admin/redirect/users/:productId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -142,14 +132,12 @@ func returnOpertorList(phone string) {
 
 }
 
-func returnDesktop(phone string) {
+func returnDesktop(ip string, port string) {
 	//POST
 	//queue/admin/redirect/workPlaces/:productId
 
 	// Set variable values
 	gatewayURL := "queue/admin/redirect/workPlaces/:productId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -170,14 +158,12 @@ func returnDesktop(phone string) {
 
 }
 
-func redirectUser(phone string) {
+func redirectUser(ip string, port string) {
 	//POST
 	// queue/admin/redirect/:productId
 
 	// Set variable values
 	gatewayURL := "queue/admin/redirect/:productId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -198,14 +184,12 @@ func redirectUser(phone string) {
 
 }
 
-func getInfoTiket(phone string) {
+func getInfoTiket(ip string, port string) {
 	//GET
 	//queue/admin/tickets/:ticketId
 
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -226,14 +210,12 @@ func getInfoTiket(phone string) {
 
 }
 
-func returnAllTiketsPredList(phone string) {
+func returnAllTiketsPredList(ip string, port string) {
 	//GET
 	//queue/admin/booking
 
 	// Set variable values
 	gatewayURL := "queue/admin/booking"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -254,14 +236,12 @@ func returnAllTiketsPredList(phone string) {
 
 }
 
-func returnAllTikets(phone string) {
+func returnAllTikets(ip string, port string) {
 	//GET
 	//queue/admin/tickets
 
 	// Set variable values
 	gatewayURL := "queue/admin/tickets"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -282,14 +262,12 @@ func returnAllTikets(phone string) {
 
 }
 
-func returnTokenAuth(phone string) {
+func returnTokenAuth(ip string, port string) {
 	//POST
 	//queue/admin/login/:login/:password
 
 	// Set variable values
 	gatewayURL := "queue/admin/login/:login/:password"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -310,14 +288,12 @@ func returnTokenAuth(phone string) {
 
 }
 
-func getListService(phone string) {
+func getListService(ip string, port string) {
 	//GET
 	//config/products
 
 	// Set variable values
 	gatewayURL := "config/products"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -338,14 +314,12 @@ func getListService(phone string) {
 
 }
 
-func getListServiceAndCategory(phone string) {
+func getListServiceAndCategory(ip string, port string) {
 	//GET
 	//config/products/simple
 
 	// Set variable values
 	gatewayURL := "config/products/simple"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -366,14 +340,12 @@ func getListServiceAndCategory(phone string) {
 
 }
 
-func selectMenuService(phone string) {
+func selectMenuService(ip string, port string) {
 	//GET
 	//config/menus
 
 	// Set variable values
 	gatewayURL := "config/menus"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -394,15 +366,13 @@ func selectMenuService(phone string) {
 
 }
 
-func selectMenuServiceId(phone string) {
+func selectMenuServiceId(ip string, port string) {
 	//tree service
 	//GET
 	//config/menus/:menuId
 
 	// Set variable values
 	gatewayURL := "config/menus/:menuId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -423,14 +393,12 @@ func selectMenuServiceId(phone string) {
 
 }
 
-func returnTimeService(phone string) {
+func returnTimeService(ip string, port string) {
 	//GET
 	// queue/awaiting
 
 	// Set variable values
 	gatewayURL := "queue/awaiting"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -453,11 +421,9 @@ func returnTimeService(phone string) {
 
 //GET booking/menu
 //Возвращает дерево меню выбора услуг для предварительной записи
-func returnTimeService(phone string) {
+func returnMenuServicePre(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/menu"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -480,11 +446,9 @@ func returnTimeService(phone string) {
 
 //GET booking/schedule/days
 //Возвращает дни, в которые доступна предварительная запись для указанной услуги
-func returnTimeService(phone string) {
+func returnDayPre(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/schedule/days"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -507,11 +471,9 @@ func returnTimeService(phone string) {
 
 //GET booking/schedule/days/:date
 //Возвращает список временных точек, доступных для предварительной записи в указанную дату
-func returnTimeService(phone string) {
+func returnListTimePreService(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/schedule/days/:date"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -538,11 +500,9 @@ func returnTimeService(phone string) {
 //любая строка. Данный метод аутентификации может
 //использоваться только с доверенного адреса,
 //который указывается в настройках очереди.
-func returnTimeService(phone string) {
+func returnTokeAuth(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/login/:userIdentity"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -560,17 +520,14 @@ func returnTimeService(phone string) {
 
 	//print response
 	fmt.Println(resp.Status)
-
 }
 
 //POST booking/book/:date/:time
 //Предварительная запись на получение услуги. Возвращает элемент с данными о записи,
 //включающими идентификатор талона для дальнейшей работы.
-func returnTimeService(phone string) {
+func returnIdTiket(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/book/:date/:time"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -588,16 +545,13 @@ func returnTimeService(phone string) {
 
 	//print response
 	fmt.Println(resp.Status)
-
 }
 
 //GET booking/tickets
 //Возвращает список талонов предварительной записи аутентифицированного пользователя
-func returnTimeService(phone string) {
+func returnListTicketAuthUser(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/tickets"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -619,11 +573,9 @@ func returnTimeService(phone string) {
 
 //GET booking/tickets/:ticketId
 //Получение информации о талоне предварительной записи
-func returnTimeService(phone string) {
+func infoPreTicket(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/tickets/:ticketId"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -645,11 +597,9 @@ func returnTimeService(phone string) {
 
 //POST booking/tickets/:ticketId/confirm
 //Подтверждение предварительной записи. Требуется, если параметр confirm в методе booking не был передан
-func returnTimeService(phone string) {
+func confurmPre(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/tickets/:ticketId/confirm"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -671,11 +621,9 @@ func returnTimeService(phone string) {
 
 //POST booking/tickets/:ticketId/cancel
 //Отмена предварительной записи.
-func returnTimeService(phone string) {
+func cancelPre(ip string, port string) {
 	// Set variable values
 	gatewayURL := "booking/tickets/:ticketId/cancel"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params
@@ -697,11 +645,9 @@ func returnTimeService(phone string) {
 
 //GET /tickets/ticketpng/:ticketId/
 //Получение талончика по предварительной записи в печатном виде
-func returnTimeService(phone string) {
+func PrintPreTicket(ip string, port string) {
 	// Set variable values
 	gatewayURL := "/tickets/ticketpng/:ticketId/"
-	ip := "192.168.10.176"
-	port := "5600"
 	urlStr := ip + port + gatewayURL
 
 	// Params

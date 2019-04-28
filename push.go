@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	// go get github.com/google/go-gcm
+
+	"github.com/google/go-gcm"
 )
 
 func SendGCMToClient(pushText string, pushToken string) {
