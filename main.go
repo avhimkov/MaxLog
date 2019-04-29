@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 )
@@ -33,19 +34,20 @@ func main() {
 		log.Panic(errMax)
 	}
 
-	// configurationSMS.Login
-	// configurationSMS.Password
+	login := configurationSMS.Login
+	pass := configurationSMS.Password
 
-	// configurationMax.IP
-	// configurationMax.Port
+	ip := configurationMax.IP
+	port := configurationMax.Port
 
-	// if err != nil {
-	// 	log.Panic(err)
-	// }
+	fmt.Println(login)
+	fmt.Println(pass)
+	fmt.Println(ip)
+	fmt.Println(port)
 
 	// sms
-	tele2("79827468271")
+	tele2("79827468271", login, pass, "MFC", "Hello")
 	// push
 
-	/* SendGMToClient("Hello from GCM", "<CLIENT TOKEN>") */
+	SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
 }

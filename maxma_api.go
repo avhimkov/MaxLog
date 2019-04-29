@@ -7,6 +7,21 @@ import (
 	"strings"
 )
 
+//http://" + location.hostname + ":5612/QMSSR
+
+/**
+ * Асинхронная регистрация талона
+ * @param {{serviceId, languageId, custData, noteText, priorityId, userId}} params
+ * @returns promise
+ */
+
+/** Асинхронно получить информацию по пину
+ * [registerByPIN description]
+ * @param {number}   pin      [description]
+ * @param {[type]}   attr     [description]
+ * @param {Function} callback [description]
+ */
+
 func newTicket(ip string, port string) {
 
 	//POST queue/admin/tickets/new
