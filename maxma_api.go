@@ -23,8 +23,6 @@ import (
  */
 
 func newTicket(ip string, port string) {
-
-	//POST queue/admin/tickets/new
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/new"
 	urlStr := ip + port + gatewayURL
@@ -48,7 +46,6 @@ func newTicket(ip string, port string) {
 }
 
 func serviceInTicket(ip string, port string) {
-
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId/addProduct/:productId"
 	urlStr := ip + port + gatewayURL
@@ -72,7 +69,6 @@ func serviceInTicket(ip string, port string) {
 }
 
 func cancelServiceTiket(ip string, port string) {
-	//queue/admin/tickets/:ticketId/:ticketProductId/cancel
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId/:ticketProductId/cancel"
 	urlStr := ip + port + gatewayURL
@@ -96,9 +92,6 @@ func cancelServiceTiket(ip string, port string) {
 }
 
 func prioritetServiceTiket(ip string, port string) {
-	//POST
-	//queue/admin/tickets/:ticketId/:ticketProductId/setPriority
-
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId/:ticketProductId/setPriority"
 	urlStr := ip + port + gatewayURL
@@ -122,9 +115,6 @@ func prioritetServiceTiket(ip string, port string) {
 }
 
 func returnOpertorList(ip string, port string) {
-	//POST
-	//queue/admin/redirect/users/:productId
-
 	// Set variable values
 	gatewayURL := "queue/admin/redirect/users/:productId"
 	urlStr := ip + port + gatewayURL
@@ -148,9 +138,6 @@ func returnOpertorList(ip string, port string) {
 }
 
 func returnDesktop(ip string, port string) {
-	//POST
-	//queue/admin/redirect/workPlaces/:productId
-
 	// Set variable values
 	gatewayURL := "queue/admin/redirect/workPlaces/:productId"
 	urlStr := ip + port + gatewayURL
@@ -174,9 +161,6 @@ func returnDesktop(ip string, port string) {
 }
 
 func redirectUser(ip string, port string) {
-	//POST
-	// queue/admin/redirect/:productId
-
 	// Set variable values
 	gatewayURL := "queue/admin/redirect/:productId"
 	urlStr := ip + port + gatewayURL
@@ -200,9 +184,6 @@ func redirectUser(ip string, port string) {
 }
 
 func getInfoTiket(ip string, port string) {
-	//GET
-	//queue/admin/tickets/:ticketId
-
 	// Set variable values
 	gatewayURL := "queue/admin/tickets/:ticketId"
 	urlStr := ip + port + gatewayURL
@@ -226,9 +207,6 @@ func getInfoTiket(ip string, port string) {
 }
 
 func returnAllTiketsPredList(ip string, port string) {
-	//GET
-	//queue/admin/booking
-
 	// Set variable values
 	gatewayURL := "queue/admin/booking"
 	urlStr := ip + port + gatewayURL
@@ -252,9 +230,6 @@ func returnAllTiketsPredList(ip string, port string) {
 }
 
 func returnAllTikets(ip string, port string) {
-	//GET
-	//queue/admin/tickets
-
 	// Set variable values
 	gatewayURL := "queue/admin/tickets"
 	urlStr := ip + port + gatewayURL
@@ -278,9 +253,6 @@ func returnAllTikets(ip string, port string) {
 }
 
 func returnTokenAuth(ip string, port string) {
-	//POST
-	//queue/admin/login/:login/:password
-
 	// Set variable values
 	gatewayURL := "queue/admin/login/:login/:password"
 	urlStr := ip + port + gatewayURL
@@ -304,9 +276,6 @@ func returnTokenAuth(ip string, port string) {
 }
 
 func getListService(ip string, port string) {
-	//GET
-	//config/products
-
 	// Set variable values
 	gatewayURL := "config/products"
 	urlStr := ip + port + gatewayURL
@@ -330,9 +299,6 @@ func getListService(ip string, port string) {
 }
 
 func getListServiceAndCategory(ip string, port string) {
-	//GET
-	//config/products/simple
-
 	// Set variable values
 	gatewayURL := "config/products/simple"
 	urlStr := ip + port + gatewayURL
@@ -356,9 +322,6 @@ func getListServiceAndCategory(ip string, port string) {
 }
 
 func selectMenuService(ip string, port string) {
-	//GET
-	//config/menus
-
 	// Set variable values
 	gatewayURL := "config/menus"
 	urlStr := ip + port + gatewayURL
@@ -383,9 +346,6 @@ func selectMenuService(ip string, port string) {
 
 func selectMenuServiceId(ip string, port string) {
 	//tree service
-	//GET
-	//config/menus/:menuId
-
 	// Set variable values
 	gatewayURL := "config/menus/:menuId"
 	urlStr := ip + port + gatewayURL
@@ -434,7 +394,6 @@ func returnTimeService(ip string, port string) {
 
 }
 
-//GET booking/menu
 //Возвращает дерево меню выбора услуг для предварительной записи
 func returnMenuServicePre(ip string, port string) {
 	// Set variable values
@@ -459,7 +418,6 @@ func returnMenuServicePre(ip string, port string) {
 
 }
 
-//GET booking/schedule/days
 //Возвращает дни, в которые доступна предварительная запись для указанной услуги
 func returnDayPre(ip string, port string) {
 	// Set variable values
@@ -484,7 +442,6 @@ func returnDayPre(ip string, port string) {
 
 }
 
-//GET booking/schedule/days/:date
 //Возвращает список временных точек, доступных для предварительной записи в указанную дату
 func returnListTimePreService(ip string, port string) {
 	// Set variable values
@@ -509,7 +466,6 @@ func returnListTimePreService(ip string, port string) {
 
 }
 
-//POST booking/login/:userIdentity
 //Возвращает токен авторизации. В качестве
 //идентификатора пользователя может быть передана
 //любая строка. Данный метод аутентификации может
@@ -537,7 +493,6 @@ func returnTokeAuth(ip string, port string) {
 	fmt.Println(resp.Status)
 }
 
-//POST booking/book/:date/:time
 //Предварительная запись на получение услуги. Возвращает элемент с данными о записи,
 //включающими идентификатор талона для дальнейшей работы.
 func returnIdTiket(ip string, port string) {
@@ -562,7 +517,6 @@ func returnIdTiket(ip string, port string) {
 	fmt.Println(resp.Status)
 }
 
-//GET booking/tickets
 //Возвращает список талонов предварительной записи аутентифицированного пользователя
 func returnListTicketAuthUser(ip string, port string) {
 	// Set variable values
@@ -586,7 +540,6 @@ func returnListTicketAuthUser(ip string, port string) {
 	fmt.Println(resp.Status)
 }
 
-//GET booking/tickets/:ticketId
 //Получение информации о талоне предварительной записи
 func infoPreTicket(ip string, port string) {
 	// Set variable values
@@ -610,7 +563,6 @@ func infoPreTicket(ip string, port string) {
 	fmt.Println(resp.Status)
 }
 
-//POST booking/tickets/:ticketId/confirm
 //Подтверждение предварительной записи. Требуется, если параметр confirm в методе booking не был передан
 func confurmPre(ip string, port string) {
 	// Set variable values
@@ -634,7 +586,6 @@ func confurmPre(ip string, port string) {
 	fmt.Println(resp.Status)
 }
 
-//POST booking/tickets/:ticketId/cancel
 //Отмена предварительной записи.
 func cancelPre(ip string, port string) {
 	// Set variable values
@@ -658,7 +609,6 @@ func cancelPre(ip string, port string) {
 	fmt.Println(resp.Status)
 }
 
-//GET /tickets/ticketpng/:ticketId/
 //Получение талончика по предварительной записи в печатном виде
 func PrintPreTicket(ip string, port string) {
 	// Set variable values
