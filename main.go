@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 )
@@ -18,6 +17,7 @@ type ConfigMax struct {
 }
 
 func main() {
+	// SMS
 	fileSMS, _ := os.Open("configsms.json")
 	decoderSMS := json.NewDecoder(fileSMS)
 	configurationSMS := ConfigSMS{}
@@ -26,6 +26,7 @@ func main() {
 		log.Panic(errSMS)
 	}
 
+	// MAXIMA
 	fileMax, _ := os.Open("configMax.json")
 	decoderMax := json.NewDecoder(fileMax)
 	configurationMax := ConfigMax{}
@@ -34,20 +35,26 @@ func main() {
 		log.Panic(errMax)
 	}
 
+	// SMS
 	login := configurationSMS.Login
 	pass := configurationSMS.Password
 
+	// MAXIMA
 	ip := configurationMax.IP
 	port := configurationMax.Port
 
-	fmt.Println(login)
-	fmt.Println(pass)
-	fmt.Println(ip)
-	fmt.Println(port)
+	// fmt.Println(login)
+	// fmt.Println(pass)
+
+	// fmt.Println(ip)
+	// fmt.Println(port)
+
+	// Maxima
+	getInfoTiket(ip, port)
 
 	// sms
 	tele2("79827468271", login, pass, "MFC", "Hello")
-	// push
 
+	// push
 	SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
 }
