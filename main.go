@@ -41,16 +41,8 @@ func main() {
 
 	// MAXIMA
 	ip := configurationMax.IP
-	port := configurationMax.Port
 
-	// fmt.Println(login)
-	// fmt.Println(pass)
-
-	// fmt.Println(ip)
-	// fmt.Println(port)
-
-	// Maxima
-	getInfoTiket(ip, port)
+	maxNewTicket(ip)
 
 	// sms
 	tele2("79827468271", login, pass, "MFC", "Hello")
