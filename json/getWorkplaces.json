@@ -1,0 +1,13 @@
+{
+    "Command": "cmd_GetWorkplaces",
+    "Workplaces": [
+        { "ID": "1", "Name": "Окно №1", "PlaceNo": "1", "IDCon": "192.168.10.101", "Active": "0", "State": "2" },
+        { "ID": "2", "Name": "Окно №2", "PlaceNo": "2", "IDCon": "192.168.10.102", "Active": "0", "State": "0" },
+        { "ID": "3", "Name": "Окно №3", "PlaceNo": "3", "IDCon": "192.168.10.103", "Active": "0", "State": "0" },
+        { "ID": "4", "Name": "Окно №4", "PlaceNo": "4", "IDCon": "192.168.10.104", "Active": "0", "State": "0" },
+        { "ID": "5", "Name": "Окно №5", "PlaceNo": "5", "IDCon": "192.168.10.105", "Active": "0", "State": "0" },
+        { "ID": "6", "Name": "Окно №6", "PlaceNo": "6", "IDCon": "192.168.10.106", "Active": "0", "State": "0" },
+        { "ID": "7", "Name": "Окно №7", "PlaceNo": "7", "IDCon": "192.168.10.107", "Active": "0", "State": "0" }
+    ],
+    "ResultCode": "0"
+}

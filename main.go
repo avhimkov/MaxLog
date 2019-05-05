@@ -11,11 +11,6 @@ type ConfigSMS struct {
 	Password string
 }
 
-type ConfigMax struct {
-	IP   string
-	Port string
-}
-
 func main() {
 	// SMS
 	fileSMS, _ := os.Open("configsms.json")
@@ -26,23 +21,9 @@ func main() {
 		log.Panic(errSMS)
 	}
 
-	// MAXIMA
-	fileMax, _ := os.Open("configMax.json")
-	decoderMax := json.NewDecoder(fileMax)
-	configurationMax := ConfigMax{}
-	errMax := decoderMax.Decode(&configurationMax)
-	if errMax != nil {
-		log.Panic(errMax)
-	}
-
 	// SMS
 	login := configurationSMS.Login
 	pass := configurationSMS.Password
-
-	// MAXIMA
-	ip := configurationMax.IP
-
-	maxNewTicket(ip)
 
 	// sms
 	tele2("79827468271", login, pass, "MFC", "Hello")

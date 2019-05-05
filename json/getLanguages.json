@@ -1,0 +1,7 @@
+{
+    "Command": "cmd_GetLanguages",
+    "Languages": [
+        { "ID": "0", "Name": "Русский", "ShortName": "RUS" }
+    ],
+    "ResultCode": "0"
+}

@@ -1,0 +1,72 @@
+{
+    "Command": "cmd_GetServiceByID",
+    "Service": { "Name": "Регистрация на сайте госуслуги" },
+    "HandlingWP": [
+        { "ID": "1", "Name": "Окно №1", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "2", "Name": "Окно №2", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "3", "Name": "Окно №3", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "4", "Name": "Окно №4", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "5", "Name": "Окно №5", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "6", "Name": "Окно №6", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" }
+    ],
+    "Schedule": [{
+        "StartDate": "02.05.2019",
+        "EndDate": "01.06.2019",
+        "Days": [
+            { "Day": "saturday", "StartTime": "9:00:00", "EndTime": "17:00:59" },
+            { "Day": "monday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "tuesday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "wednesday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "thursday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "friday", "StartTime": "8:00:00", "EndTime": "20:00:59" }
+        ]
+    }],
+    "ResultCode": "0"
+}
+
+{
+    "Command": "cmd_GetServiceByID",
+    "Service": { "Name": "Получить готовый результат" },
+    "HandlingWP": [
+        { "ID": "7", "Name": "Окно №7", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" }
+    ],
+    "Schedule": [{
+        "StartDate": "02.05.2019",
+        "EndDate": "01.06.2019",
+        "Days": [
+            { "Day": "saturday", "StartTime": "9:00:00", "EndTime": "17:00:59" },
+            { "Day": "monday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "tuesday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "wednesday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "thursday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "friday", "StartTime": "8:00:00", "EndTime": "20:00:59" }
+        ]
+    }],
+    "ResultCode": "0"
+}
+
+{
+    "Command": "cmd_GetServiceByID",
+    "Service": { "Name": "Получить услугу" },
+    "HandlingWP": [
+        { "ID": "1", "Name": "Окно №1", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "2", "Name": "Окно №2", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "3", "Name": "Окно №3", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "4", "Name": "Окно №4", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "5", "Name": "Окно №5", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" },
+        { "ID": "6", "Name": "Окно №6", "Active": "0", "BlockedForRegTurn": "0", "BlockedForRegSR": "0" }
+    ],
+    "Schedule": [{
+        "StartDate": "02.05.2019",
+        "EndDate": "01.06.2019",
+        "Days": [
+            { "Day": "saturday", "StartTime": "9:00:00", "EndTime": "17:00:59" },
+            { "Day": "monday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "tuesday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "wednesday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "thursday", "StartTime": "8:00:00", "EndTime": "20:00:59" },
+            { "Day": "friday", "StartTime": "8:00:00", "EndTime": "20:00:59" }
+        ]
+    }],
+    "ResultCode": "0"
+}
