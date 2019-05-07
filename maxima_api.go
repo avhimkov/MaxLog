@@ -60,6 +60,37 @@ func register() {
 	fmt.Println(resp.Status)
 }
 
+// предварительная запись
+func sr_Register() {
+	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
+	// response
+	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"1","CustID":"44171","RegDateTime":"30.05.2019 08:00:00","ResultCode":"0"}
+
+	urlStr := gatewayURL
+
+	// Params
+	v := url.Values{}
+	v.Set("command", "cmd_SR_Register")
+	v.Set("ServiceID", "289")
+	v.Set("CustData", "dfgdgdfgdfgdfgdfg") //name
+	v.Set("Note", "")
+	v.Set("PriorityID", "0")
+	v.Set("CallTime", "30.05.2019 8:00:00")
+	// SR_PIN: 1
+	// RegToID: params.userId == -1 ? undefined : params.userId
+	rb := *strings.NewReader(v.Encode())
+
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	// Make request
+	resp, _ := client.Do(req)
+
+	//print response
+	fmt.Println(resp.Status)
+}
+
 func getTicket() {
 	// response
 	// The connection to '5.141.28.124' failed
@@ -199,7 +230,7 @@ func getTicketSteps() {
 }
 
 func getSRTicketSteps() {
-	// command=cmd_GetTicketSteps&State=0%2C5%2C6
+	// command=cmd_GetTicketSteps&SRDate=02.05.2019
 	// response
 	// {"Command":"cmd_GetSRTicketSteps","SRTicketSteps":[],"ResultCode":"0"}
 
@@ -222,39 +253,75 @@ func getSRTicketSteps() {
 	fmt.Println(resp.Status)
 }
 
-// // Получение списка языков
-// "cmd_GetLanguages"
+func getLanguages() {
+	// command=cmd_GetLanguages
+	// response
+	// {"Command":"cmd_GetLanguages","Languages":[{"ID":"0","Name":"Русский","ShortName":"RUS"}],"ResultCode":"0"}
 
-// global.languages[i] = {
-// 	id: res.Languages[i].ID,
-// 	name: res.Languages[i].Name,
-// 	short: res.Languages[i].ShortName
-// };
+	urlStr := gatewayURL
 
-//  // получение параметров терминала (server.connect.config)
-// "command=cmd_getconfig"
-// global.options.barcode = res.PrintBarCode;
-// global.options.allowWU = res.UseWorkUsersRoles;
+	// Params
+	v := url.Values{}
+	v.Set("command", "cmd_GetLanguages")
+	rb := *strings.NewReader(v.Encode())
 
-// global.options.maxDays = res.SRDaysAfter; // кол-во дней для самозаписи
-// global.options.sRCurDay = res.SRCurDay; //разрешить запись на сегодня
-// global.options.sRPINLength = res.SRPINLength;
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 
-// global.options.usePIN = res.Terminal_UsePIN;
-// global.options.qrCode = res.QRCodeText || "";
-// global.options.appVer = res.AppVer || "";
+	// Make request
+	resp, _ := client.Do(req)
 
-// global.options.maxWaitingTime = res.CriticalWaitingTime || 10;
+	//print response
+	fmt.Println(resp.Status)
+}
 
-// // Получение рабочих мест
-// "cmd_GetWorkplaces"
-// global.workplaces[i] = {
-// 	id: res.Workplaces[i].ID,
-// 	idCon: res.Workplaces[i].IDCon,
-// 	name: res.Workplaces[i].Name,
-// 	placeNo: res.Workplaces[i].PlaceNo || "",
-// 	placeNo2: res.Workplaces[i].PlaceNo2 || ""
-// };
+func getGetWorkusers() {
+	// command=cmd_GetWorkusers
+	// response
+	// {"Command":"cmd_GetLanguages","Languages":[{"ID":"0","Name":"Русский","ShortName":"RUS"}],"ResultCode":"0"}
+
+	urlStr := gatewayURL
+
+	// Params
+	v := url.Values{}
+	v.Set("command", "cmd_GetWorkusers")
+	rb := *strings.NewReader(v.Encode())
+
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	// Make request
+	resp, _ := client.Do(req)
+
+	//print response
+	fmt.Println(resp.Status)
+}
+
+func getSR_InformationByPIN() {
+	// command=cmd_SR_InformationByPIN
+	// response
+
+	urlStr := gatewayURL
+
+	// Params
+	v := url.Values{}
+	v.Set("command", "cmd_SR_InformationByPIN")
+	v.Set("LangID", "0")
+	v.Set("PIN", "10")
+	rb := *strings.NewReader(v.Encode())
+
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	// Make request
+	resp, _ := client.Do(req)
+
+	//print response
+	fmt.Println(resp.Status)
+}
 
 //  // Получение рабочих мест
 // "cmd_GetWorkusers"
@@ -264,23 +331,6 @@ func getSRTicketSteps() {
 // 	last: res.WorkUsers[i].LastName || "",
 // 	second: res.WorkUsers[i].Patronimyc || ""
 // };
-
-// /**
-// * Асинхронный запрос услуг
-// * @returns promise
-// */
-// 	 getServicesAsync: function () {
-//         "use strict";
-//         var dfr = $.Deferred();
-//         var data = {
-//             command: "cmd_getservices",
-//             TypeOfMenu: 2,
-//             LanguageID: global.language
-// 		}
-// 		var result = {
-// 			code: res.ResultCode,
-// 			command: $.param(data)
-// 		};
 
 // /**
 // * Асинхронная регистрация талона
@@ -396,25 +446,6 @@ func getSRTicketSteps() {
 // 		}
 
 // 		dfr.resolve(handling, waitingList, res);
-
-// 		 /**
-//      * Асинхронная регистрация талона на время
-//      * @param {{serviceId, languageId, custData, noteText, priorityId, userId}} params
-//      * @returns promise
-//      */
-// 	 registerSRAsync: function (params) {
-//         "use strict";
-//         var dfr = $.Deferred();
-//         var data = {
-//             command: "cmd_SR_Register",
-//             ServiceID: params.serviceId,
-//             LangID: params.languageId,
-//             CustData: params.custData,
-//             Note: params.note,
-//             PriorityID: params.priorityId,
-//             CallTime: params.callTime,
-//             RegToID: params.userId == -1 ? undefined : params.userId
-// 		}
 
 // 		 /**
 //      * Асинхронная регистрация талона на время
@@ -541,43 +572,6 @@ func getSRTicketSteps() {
 // 				if (data["PriorityID_" + (i + 1)] === undefined) data["PriorityID_" + (i + 1)] = '';
 // 				if (data["RegToID_" + (i + 1)] === undefined) data["RegToID_" + (i + 1)] = '';
 // 			}
-
-// 		// Регистрация талона на предварительную запись
-// 		registerSR: function (callback) {
-// 			"use strict";
-// 			var data = {
-// 				command: "cmd_SR_Register",
-// 				ServiceID: global.register.id,
-// 				LangID: global.language,
-// 				CustData: global.register.custData,
-// 				Note: global.register.note,
-// 				CallTime: global.register.callTime,
-// 				SR_PIN: 1
-// 			}
-
-// 			if (global.register.to !== -1) {
-// 				data.RegToID = global.register.to;
-// 			}
-
-// 			/** Соединение с сервером востановлено */
-// 			restoreConnection: function () {
-// 				if (global.lostConnection) {
-// 					global.lostConnection = false;
-// 					actions.connection.online();
-// 					uiConstructor.make.overlay.hide()
-// 				}
-// 			},
-
-// 			updateCheckConnection: function () {
-// 				if (this.connectionTimeout) {
-// 					clearTimeout(this.connectionTimeout);
-// 				}
-
-// 				this.connectionTimeout = setTimeout(function () {
-// 					server.checkConnection();
-// 					this.connectionTimeout = null;
-// 				}, global.updateTime * 1000);
-// 			},
 
 // 			// Проверка соединения с сервером
 // 			checkConnection: function () {
