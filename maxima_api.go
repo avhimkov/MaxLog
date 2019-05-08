@@ -64,18 +64,18 @@ func register() {
 func sr_Register() {
 	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
 	// response
-	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"1","CustID":"44171","RegDateTime":"30.05.2019 08:00:00","ResultCode":"0"}
+	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"6","CustID":"49462","RegDateTime":"10.05.2019 12:00:00","ResultCode":"0"}
 
 	urlStr := gatewayURL
 
 	// Params
 	v := url.Values{}
 	v.Set("command", "cmd_SR_Register")
-	v.Set("ServiceID", "289")
-	v.Set("CustData", "dfgdgdfgdfgdfgdfg") //name
+	v.Set("ServiceID", "180")
+	v.Set("CustData", "Турчак") //name
 	v.Set("Note", "")
 	v.Set("PriorityID", "0")
-	v.Set("CallTime", "30.05.2019 8:00:00")
+	v.Set("CallTime", "10.05.2019 12:00:00")
 	// SR_PIN: 1
 	// RegToID: params.userId == -1 ? undefined : params.userId
 	rb := *strings.NewReader(v.Encode())
@@ -142,6 +142,7 @@ func getWorkplaces() {
 
 func getServices() {
 	// command=cmd_getservices&TypeOfMenu=2&LanguageID=0
+	// response in file getService.json
 	urlStr := gatewayURL
 
 	// Params
@@ -164,6 +165,7 @@ func getServices() {
 
 func getServiceByID() {
 	// command=cmd_GetServiceByID&GetHandlingWPorWU=1&ServiceID=289&GetWaitingCountPerWPOrWU=1
+	// response in file getServiceByID.json
 	urlStr := gatewayURL
 
 	// Params
@@ -208,7 +210,8 @@ func getConfig() {
 func getTicketSteps() {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
 	// response
-	// {"Command":"cmd_GetTicketSteps","TicketSteps":[],"ResultCode":"0"}
+	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
+	// "SourceKind":"1","State":"0","ServiceID":"190","RegTime":"08.05.2019 14:14:40","CallTime":"01.01.2000","PriorityID":"0","QualityMark":"0"}],"ResultCode":"0"}
 
 	urlStr := gatewayURL
 
@@ -310,6 +313,31 @@ func getSR_InformationByPIN() {
 	v.Set("command", "cmd_SR_InformationByPIN")
 	v.Set("LangID", "0")
 	v.Set("PIN", "10")
+	rb := *strings.NewReader(v.Encode())
+
+	client := &http.Client{}
+	req, _ := http.NewRequest("POST", urlStr, &rb)
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+
+	// Make request
+	resp, _ := client.Do(req)
+
+	//print response
+	fmt.Println(resp.Status)
+}
+
+func getIntervals() {
+	// command=cmd_SR_InformationByPIN
+	// response
+
+	urlStr := gatewayURL
+
+	// Params
+	v := url.Values{}
+	v.Set("command", "cmd_GetIntervals")
+	v.Set("ServiceID", "180")
+	v.Set("DateFrom", "09.05.2019")
+	v.Set("DateTo", "09.05.2019")
 	rb := *strings.NewReader(v.Encode())
 
 	client := &http.Client{}
