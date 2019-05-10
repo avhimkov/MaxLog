@@ -25,6 +25,8 @@ func main() {
 	login := configurationSMS.Login
 	pass := configurationSMS.Password
 
+	register("289", "name", "", "0", "6")
+
 	// sms
 	tele2("79827468271", login, pass, "MFC", "Hello")
 

@@ -35,7 +35,7 @@ func maxima() string {
 }
 
 // Регистрация талона
-func register(serid, custdata, note, priorid, to string) {
+func register(serid, custdata, note, priorid, toid string) {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
 	// response
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
@@ -49,7 +49,7 @@ func register(serid, custdata, note, priorid, to string) {
 	v.Set("CustData", custdata)  //Информация о посетителе
 	v.Set("Note", note)          // "" -- Примечание оператора
 	v.Set("PriorityID", priorid) // "0" -- Приоритет посетителя
-	v.Set("to", to)              // ID рабочего места или роли, к кому направить посетителя (по умолчанию(-1) - к любому)
+	v.Set("RegToID", toid)       // ID рабочего места или роли, к кому направить посетителя (по умолчанию(-1) - к любому)
 	//v.Set("callTime", "0")                 // время вызова
 	rb := *strings.NewReader(v.Encode())
 
@@ -220,7 +220,7 @@ func getConfig() {
 }
 
 // Получение списка талонов
-func getTicketSteps() {
+func getTicketSteps(state string) {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
 	// response
 	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
@@ -231,7 +231,7 @@ func getTicketSteps() {
 	// Params
 	v := url.Values{}
 	v.Set("command", "cmd_GetTicketSteps")
-	v.Set("State", "0,5,6")
+	v.Set("State", state) //"0,5,6", "0,5,6,3" 0 = , 3 = неявка заявителя (удаление талона из очереди), 5 = талон отложен , 6 = ожидающие
 	rb := *strings.NewReader(v.Encode())
 
 	client := &http.Client{}
@@ -392,7 +392,7 @@ func getIntervals(servid, datefrom, dateto string) {
 }
 
 // Обнавление статуса талона
-func updateTicketStep() {
+func updateTicketStep(tiketid, state string) {
 	// command=cmd_UpdateTicketStep
 	// response
 
@@ -401,14 +401,16 @@ func updateTicketStep() {
 	// Params
 	v := url.Values{}
 	v.Set("command", "cmd_UpdateTicketStep")
-	v.Set("TicketStepID", "")
-	v.Set("ServiceID", "")
-	v.Set("PriorityID", "")
-	v.Set("RatingID", "")
-	v.Set("CustData", "")
+	v.Set("TicketStepID", tiketid) // "49978"
 	v.Set("Note", "")
-	v.Set("RegToID", "")
-	v.Set("State", "")
+	v.Set("State", state) // 3 = неявка заявителя (удаление талона из очереди), 5 = талон отложен , 6 = ожидающие
+	//{"Command":"cmd_UpdateTicketStep","QNT":"-1","WaitTime":"0:00:00","ResultCode":"0"}
+
+	// v.Set("ServiceID", "")
+	// v.Set("PriorityID", "")
+	// v.Set("RatingID", "")
+	// v.Set("CustData", "")
+	// v.Set("RegToID", "")
 	rb := *strings.NewReader(v.Encode())
 
 	client := &http.Client{}
