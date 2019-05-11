@@ -1,0 +1,101 @@
+<!--controller.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "header.html" .}}
+<div class="container">
+    <p></p>
+    <div class="card">
+    <h3 class="card-header">Выборать по дате</h3>
+        <div class="card-body">
+            <!--If there's an error, display the error-->
+            {{ if .ErrorTitle}}
+                <p class="bg-danger">
+                {{.ErrorTitle}}: {{.ErrorMessage}}
+                </p>
+            {{end}}
+            <div class="col-sm-12">
+                <p></p>
+                <form id="date" class="form" action="/controller" method="GET">
+                        <div class="form-row">
+                            <div class="col">
+                                <h6>Выбрать дату</h6>
+                                <label class="sr-only" for="inlineFormInput">Выбрать дату</label>
+                                <input type="datetime-local" name="date" class="form-control" id="date" value="{{.timeNow}}">
+                            </div>
+                            <div class="col">
+                                <h6>Выбрать пользователя</h6>
+                                <select name="users" id="users" class="form-control mr-sm-2 mb-2 mb-sm-0"> 
+                                <option>Выберите оператора</option>
+                                {{range $key, $value := .listusers}}
+                                    <option value="{{$value}}">{{$value}}</option>
+                                {{end}}
+                                </select>
+                            </div>
+                        </div>
+                    <p></p>
+                    <button type="submit" form="date" class="btn btn-primary float-right">Найти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<div class="container-fluid">
+    <div class="card">
+        <h3 class="card-header panel-success white-text">Список заявлений</h3>
+        <div class="card-body">
+            <table id="table"class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <!-- checkbox -->
+                    <!-- <th class="pr-md-3 pr-5">
+                            <input type="checkbox" class="filled-in" id="checkbox123">
+                            <label for="checkbox123" class="label-table"></label>
+                    </th> -->
+
+                    <th></th>
+                    <th>№</th>
+                    <th data-field="Name">Имя заявитель</th>
+                    <th>Название услуги</th>
+                    <th>Под услуга</th>
+                    <th>Дата регистрации</th>
+                    <th>Дата отправки</th>
+                    <th>Дата получения</th>
+                    <th>Адрес</th>
+                    <th>Место оператора</th>
+                    <th>Номер</th>
+                    <th>Телефон</th>
+                    <th>Нотация</th>
+                </tr>
+                <script>
+                        function Formatter(value) {
+                            return value.substring(0,20) + "...";
+                        }
+                </script>
+                </thead>
+                    <tbody>
+                        {{range $i, $e := .person}}
+                        <tr>
+                            <td class="bs-checkbox "><input data-index="{{$i}}" name="btSelectItem" type="checkbox"></td>
+                            <td>{{$i}}</td>
+                            <td>{{$e.Name}}</td>
+                            <td>{{$e.SubName}}</td>
+                            <td>{{$e.NameService}}</td>
+                            <td>{{$e.DateIn}}</td>
+                            <td>{{$e.DateSend}}</td>
+                            <td>{{$e.DateOut}}</td>
+                            <td>{{$e.Address}}</td>
+                            <td>{{$e.Location}}</td>
+                            <td>{{$e.Number}}</td>
+                            <td>{{$e.Phone}}</td>
+                            <td>{{$e.Note}}</td>
+                        </tr>
+                        {{end}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}
