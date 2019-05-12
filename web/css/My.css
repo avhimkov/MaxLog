@@ -1,0 +1,101 @@
+@charset "UTF-8";
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+/* scroll-to-top */
+.scroll-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  display: none;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: #fff;
+  background: rgba(52, 58, 64, 0.5);
+  line-height: 46px;
+}
+.scroll-to-top:focus, .scroll-to-top:hover {
+  color: white;
+}
+.scroll-to-top:hover {
+  background: #343a40;
+}
+.scroll-to-top i {
+  font-weight: 800;
+}
+
+.smaller {
+  font-size: 0.7rem;
+}
+
+.o-hidden {
+  overflow: hidden !important;
+}
+
+.z-0 {
+  z-index: 0;
+}
+
+.z-1 {
+  z-index: 1;
+}
+
+/* menu navbar hide */
+/* .active {
+  background-color: #4CAF50;
+} */
+
+#navbar {
+  overflow: hidden;
+  background-color: #555;
+  z-index: 9999;
+  position: fixed;
+  top:0px;
+  width: 100%;
+  box-shadow: 0 0 3px #b4b4b4;
+  transition: all ease-out 0.5s;
+  -webkit-transition: all ease-out 0.5s;
+  -moz-transition: all ease-out 0.5s;
+  transition: all ease-out 0.5s;
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #b4b4b4;
+  text-align: center;
+  padding: 15px;
+  text-decoration: none;
+}
+
+#navbar a:hover {
+  /* background-color: #000; */
+  color: white;
+}
+
+.container-fluid {
+  margin: 5em auto;
+  text-align: justify;
+}
+
+.container {
+  margin: 5em auto;
+  text-align: justify;
+}
+
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.topnav-right {
+  float: right;
+}
+

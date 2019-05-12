@@ -1,5 +1,11 @@
 package main
 
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
 type ConfigSMS struct {
 	Login    string
 	Password string
@@ -23,7 +29,8 @@ func SetupRouter() *gin.Engine {
 	g.Use(gin.Logger())
 	// Recovery middleware
 	g.Use(gin.Recovery())
-	g.Use(favicon.New("./assets/favicon.ico"))
+	// g.Use(static.Serve("/assets", static.LocalFile("./assets/favicon.ico", true)))
+	// g.Use(favicon.New("./assets/favicon.ico"))
 
 	// g.Use(static.Serve("/web", static.LocalFile("/web", false)))
 	// v1 := router.Group("api/v1")
@@ -31,7 +38,7 @@ func SetupRouter() *gin.Engine {
 	// 	v1.GET("/instructions", GetInstructions)
 	// }
 
-	g.Use(permissionHandler)
+	// g.Use(permissionHandler)
 
 	return g
 }
@@ -61,5 +68,13 @@ func main() {
 
 	g := SetupRouter()
 	g.GET("/", indexPage)
+
+	// 404 page
+	g.NoRoute(func(c *gin.Context) {
+		c.HTML(http.StatusOK, "404.html", gin.H{})
+	})
+
+	// Start serving the application
+	g.Run(":3000")
 
 }

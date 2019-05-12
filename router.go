@@ -7,10 +7,10 @@ import (
 )
 
 func indexPage(c *gin.Context) {
-	isloggedin := isloggedin(c)
-	if isloggedin {
-		c.HTML(http.StatusOK, "operator.html", gin.H{"is_logged_in": isloggedin})
-	} else {
-		http.Redirect(c.Writer, c.Request, "/login", 302)
-	}
+	// isloggedin := isloggedin(c)
+	// if isloggedin {
+	c.HTML(http.StatusOK, "operator.html", gin.H{})
+	// } else {
+	// http.Redirect(c.Writer, c.Request, "/login", 302)
+	// }
 }
