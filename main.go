@@ -21,6 +21,7 @@ func SetupRouter() *gin.Engine {
 	g.Static("/web", "./web")
 	g.Static("/assets", "./assets")
 	g.Static("/node_modules", "./node_modules")
+	g.StaticFile("/favicon.ico", "./assets/favicon.ico")
 	g.LoadHTMLGlob("templates/*.html")
 
 	// g := gin.New()
@@ -29,8 +30,6 @@ func SetupRouter() *gin.Engine {
 	g.Use(gin.Logger())
 	// Recovery middleware
 	g.Use(gin.Recovery())
-	// g.Use(static.Serve("/assets", static.LocalFile("./assets/favicon.ico", true)))
-	// g.Use(favicon.New("./assets/favicon.ico"))
 
 	// g.Use(static.Serve("/web", static.LocalFile("/web", false)))
 	// v1 := router.Group("api/v1")
@@ -44,26 +43,14 @@ func SetupRouter() *gin.Engine {
 }
 
 func main() {
-	/* 	// SMS
-	   	fileSMS, _ := os.Open("configsms.json")
-	   	decoderSMS := json.NewDecoder(fileSMS)
-	   	configurationSMS := ConfigSMS{}
-	   	errSMS := decoderSMS.Decode(&configurationSMS)
-	   	if errSMS != nil {
-	   		log.Panic(errSMS)
-	   	}
+	/*
+		register("289", "name", "", "0", "6")
 
-	   	// SMS
-	   	login := configurationSMS.Login
-	   	pass := configurationSMS.Password
+		// sms
+		tele2("79827468271", login, pass, "MFC", "Hello")
 
-	   	register("289", "name", "", "0", "6")
-
-	   	// sms
-	   	tele2("79827468271", login, pass, "MFC", "Hello")
-
-	   	// push
-	   	SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
+		// push
+		SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
 	*/
 
 	g := SetupRouter()

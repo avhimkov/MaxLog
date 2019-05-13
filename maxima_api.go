@@ -20,7 +20,7 @@ type ConfigMax struct {
 // чтение конфигурационного файла
 func maxima() string {
 	// MAXIMA
-	fileMax, _ := os.Open("configMax.json")
+	fileMax, _ := os.Open("./config/configMax.json")
 	decoderMax := json.NewDecoder(fileMax)
 	configurationMax := ConfigMax{}
 	errMax := decoderMax.Decode(&configurationMax)
@@ -62,6 +62,7 @@ func register(serid, custdata, note, priorid, toid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
 }
 
 // Регистрация нескольких талонов

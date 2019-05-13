@@ -1,11 +1,28 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
+
+func sms() (string, string) {
+	fileSMS, _ := os.Open("./config/configsms.json")
+	decoderSMS := json.NewDecoder(fileSMS)
+	configurationSMS := ConfigSMS{}
+	errSMS := decoderSMS.Decode(&configurationSMS)
+	if errSMS != nil {
+		log.Panic(errSMS)
+	}
+	login := configurationSMS.Login
+	pass := configurationSMS.Password
+
+	return login, pass
+}
 
 func tele2(phone string, login string, password string, sender string, text string) {
 	// Set variable values
