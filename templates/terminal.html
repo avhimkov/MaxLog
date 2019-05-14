@@ -9,9 +9,25 @@
         <h3 class="card-header">Регистрация услуги</h3>
         <div class="col-sm-12">
             <p></p>
-            <div>
-                <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+            <div class="form-row">
+                <div class="col">
+                    <h6>Название услуги</h6>
+                    <label class="sr-only" for="inlineFormInput">Название услуги</label>
+                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+                </div>
+                <div class="col">
+                    <h6>Окна</h6>
+                    <label class="sr-only" for="inlineFormInput">Окна</label>
+                    <select class="custom-select">
+                    <!-- <select class="custom-select" multiple> -->
+                                    <!-- <option selected>Open this select menu</option> -->
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                    </select>
+                </div>
             </div>
+
             <p></p>
             <div id="jstree">
                 <script>
@@ -197,137 +213,6 @@
     <p></p>
 
 
-
-    <!-- <div class="card">
-        <h3 class="card-header">Регистрация услуги</h3>
-        <div class="card-body">-->
-    <!--If there's an error, display the error-->
-    <!-- {{ if .ErrorTitle}}
-            <p class="bg-danger">
-                {{.ErrorTitle}}: {{.ErrorMessage}}
-            </p>
-            {{end}}
-            <div class="col-sm-12">
-                <h6>Услуги</h6>
-                <p></p>
-                <form class="reg-service" action="/operator" method="POST">
-                    <div class="form-row">
-                        <div class="col">
-                            <h6>ФИО заявителя</h6>
-                            <label class="sr-only" for="inlineFormInput">Имя заявителя</label> -->
-    <!-- <select multiple name="name" id="name" placeholder="Заявитель" class="form-control mr-sm-2 mb-2 mb-sm-0"> 
-    
-                                </select> -->
-    <!-- <input type="text" name="name" class="form-control mr-sm-2 mb-2 mb-sm-0" id="name" placeholder="ФИО заявителя" required>
-                        </div>
-                        <p></p>
-                        <div class="col">
-                            <h6>Представитель заявителя</h6>
-                            <label class="sr-only" for="inlineFormInput">Представитель заявителя</label> -->
-    <!-- <select multiple name="name" id="name" placeholder="Заявитель" class="form-control mr-sm-2 mb-2 mb-sm-0"> 
-       
-                                </select> -->
-    <!-- <input type="text" name="subname" class="form-control mr-sm-2 mb-2 mb-sm-0" id="subname" placeholder="Представитель заявителя" required>
-                        </div>
-                        <p></p>
-
-                    </div>
-                    <p></p>
-                    <div class="form-row">
-                        <div class="col">
-                            <h6>Название услуги</h6>
-                            <label class="sr-only" for="inlineFormInput">Название услуги</label>
-                            <select name="loc" id="loc" placeholder="Место оператора" class="form-control mr-sm-2 mb-2 mb-sm-0"> 
-                                        {{range $index, $val := .service}}
-                                            <option value="{{$val.NameService}}">{{$val.NameService}}</option>
-                                        {{end}}
-                                </select>
-                        </div>
-                    </div>
-                    <p></p>
-                    <div class="form-row">
-                        <div class="col">
-                            <h6>Дата регистрации</h6>
-                            <label class="sr-only" for="inlineFormInput">Дата регистрации</label>
-                            <input type="datetime-local" name="datein" class="form-control mr-sm-2 mb-2 mb-sm-0" id="datein" value="{{.timeNow}}" required>
-                        </div>
-
-                        <div class="col">
-                            <h6>Офис</h6>
-                            <label class="sr-only" for="inlineFormInput">Офис</label>
-                            <select name="loc" id="loc" placeholder="Место оператора" class="form-control mr-sm-2 mb-2 mb-sm-0"> 
-                                    {{range $index, $val := .location}}
-                                        <option value="{{$val.Office}}">{{$val.Office}}</option>
-                                    {{end}}
-                                </select>
-                        </div>
-                        <div class="col">
-                            <h6>Место оператора</h6>
-                            <label class="sr-only" for="inlineFormInput">Место оператора</label>
-                            <select name="loc" id="loc" placeholder="Место оператора" class="form-control mr-sm-2 mb-2 mb-sm-0"> 
-                                    {{range $index, $val := .location}}
-                                        <option value="{{$val.Operator}}">{{$val.Operator}}</option>
-                                    {{end}}
-                                </select>
-                        </div>
-                    </div>
-                    <p></p>
-                    <div class="form-row">
-                        <div class="col">
-                            <h6>Адрес</h6>
-                            <label class="sr-only" for="inlineFormInput">Адрес</label>
-                            <input type="text" name="address" class="form-control" id="address" placeholder="Адрес" required>
-                        </div> -->
-    <!-- TODO API YANDEX -->
-    <!-- <script>
-                                function onLoad (ymaps) {
-                                    var suggestView = new ymaps.SuggestView('address');
-                                }
-                            </script> -->
-    <!-- </div>
-                    <p></p>
-                    <div class="form-row">
-                        <p></p>
-                        <div class="col">
-                            <h6>Номер</h6>
-                            <label class="sr-only" for="inlineFormInput">Номер</label>
-                            <input type="text" name="number" class="form-control" id="number" placeholder="Номер" required>
-                            <script>
-                                $(function() {
-                                    //Использование параметра completed jquery.maskedinput.min.js
-                                    $("#number").mask("999");
-                                });
-                            </script>
-                        </div> -->
-    <!-- <p></p>
-                        <div class="col">
-                            <h6>Телефон</h6>
-                            <label class="sr-only" for="inlineFormInput">Телефон</label>
-                            <input type="text" name="phone" id="phone" class="form-control" required>
-                            <script>
-                                $(function() {
-                                    //Использование параметра completed jquery.maskedinput.min.js
-                                    $("#phone").mask("+7 (999) 999-9999");
-                                });
-                            </script>
-                        </div>
-                        <p></p>
-                        <div class="col">
-                            <h6>Описание</h6>
-                            <label class="sr-only" for="inlineFormInput">Описание</label>
-                            <input type="text" name="note" class="form-control" id="note" placeholder="Описание">
-                            <div class="help-block with-errors"></div>
-                        </div> -->
-
-    <!-- </div>
-                    <p></p>
-                    <button type="submit" id="btnSubmit" class="btn btn-primary float-right">Сохранить</button>
-                </form>
-            </div>
-        </div>
-    </div> -->
-    <p></p>
-
     <div class="card">
         <h3 class="card-header panel-success white-text">Список заявлений</h3>
         <div class="card-body">
@@ -338,12 +223,8 @@
                         <th>№</th>
                         <!-- <th data-sortable="true" data-field="User">Оператор</th> -->
                         <th>Имя заявитель</th>
-                        <th>Представитель</th>
                         <th>Название услуги</th>
                         <th>Дата регистрации</th>
-                        <th>Дата отправки</th>
-                        <th>Дата получения</th>
-                        <th>Адрес</th>
                         <th>Место оператора</th>
                         <th>Номер</th>
                         <th>Телефон</th>
@@ -377,10 +258,6 @@
                                                 <h6>Имя заявитель</h6>
                                                 <input type="text" name="name" class="form-control mr-sm-2 mb-2 mb-sm-0" id="name" value={{$e.Name}}>
                                             </div>
-                                            <div class="col">
-                                                <h6>Представитель</h6>
-                                                <input type="text" name="subname" class="form-control mr-sm-2 mb-2 mb-sm-0" id="subname" value={{$e.SubName}}>
-                                            </div>
                                         </div>
                                         <p></p>
                                         <div class="form-row">
@@ -394,21 +271,6 @@
                                             <div class="col">
                                                 <h6>Дата регистрации</h6>
                                                 <input type="datetime-local" name="datein" class="form-control" id="datein" value={{$e.DateIn}}>
-                                            </div>
-                                            <div class="col">
-                                                <h6>Дата отправки</h6>
-                                                <input type="datetime-local" name="datesend" class="form-control" id="datesend" value={{$e.DateSend}}>
-                                            </div>
-                                            <div class="col">
-                                                <h6>Дата получения</h6>
-                                                <input type="datetime-local" name="dateout" class="form-control" id="dateout" value={{$e.DateOut}}>
-                                            </div>
-                                        </div>
-                                        <p></p>
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <h6>Адрес</h6>
-                                                <input type="text" name="address" class="form-control" id="address" value={{$e.Address}}>
                                             </div>
                                         </div>
                                         <p></p>
@@ -459,11 +321,8 @@
                         <td>{{$i}}</td>
                         <!-- <td>{{$e.User}}</td> -->
                         <td>{{$e.Name}}</td>
-                        <td>{{$e.SubName}}</td>
                         <td>{{$e.NameService}}</td>
                         <td>{{$e.DateIn}}</td>
-                        <td>{{$e.DateSend}}</td>
-                        <td>{{$e.DateOut}}</td>
                         <td>{{$e.Address}}</td>
                         <td>{{$e.Location}}</td>
                         <td>{{$e.Number}}</td>
