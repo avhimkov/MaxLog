@@ -11,7 +11,7 @@
             <p></p>
             <div class="form-row">
                 <div class="col">
-                    <h6>Название услуги</h6>
+                    <h6>Найти услугу</h6>
                     <label class="sr-only" for="inlineFormInput">Название услуги</label>
                     <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
                 </div>
@@ -27,6 +27,8 @@
                     </select>
                 </div>
             </div>
+
+
 
             <p></p>
             <div id="jstree">
@@ -206,6 +208,27 @@
                     });
                 </script>
 
+            </div>
+            <p></p>
+            <div class="form-row">
+                <div class="col">
+                    <h6>ФИО посетителя</h6>
+                    <label class="sr-only" for="inlineFormInput">ФИО посетителя</label>
+                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+                </div>
+                <div class="col">
+                    <h6>Коментарий</h6>
+                    <label class="sr-only" for="inlineFormInput">Коментарий</label>
+                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+                </div>
+            </div>
+            <p></p>
+            <div class="form-row text-right">
+                <div class="col-12">
+                    <form action="/removeval/Person/" method="GET">
+                        <button class="btn btn-danger btn-rounded btn-sm my-0" type="submit"><i class="fas fa-sign-in-alt"></i></button>
+                    </form>
+                </div>
             </div>
             <p></p>
         </div>
