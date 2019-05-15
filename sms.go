@@ -11,7 +11,7 @@ import (
 )
 
 func sms() (string, string) {
-	fileSMS, _ := os.Open("./config/configsms.json")
+	fileSMS, _ := os.Open("config/configsms.json")
 	decoderSMS := json.NewDecoder(fileSMS)
 	configurationSMS := ConfigSMS{}
 	errSMS := decoderSMS.Decode(&configurationSMS)
@@ -24,13 +24,15 @@ func sms() (string, string) {
 	return login, pass
 }
 
-func tele2(phone string, login string, password string, sender string, text string) {
+func tele2(phone string, sender string, text string) {
+	login, pass := sms()
+
 	// Set variable values
 	gatewayURL := "http://bsms-proxy.tele2.ru/api/"
 
 	urlStr := gatewayURL + "api/?operation=send" +
 		"&login=" + login +
-		"&password=" + password +
+		"&password=" + pass +
 		"&msisdn=" + phone +
 		"&shortcode=" + sender +
 		"&text=" + text
@@ -39,7 +41,7 @@ func tele2(phone string, login string, password string, sender string, text stri
 	v := url.Values{}
 	v.Set("to", phone)
 	v.Set("login", login)
-	v.Set("password", password)
+	v.Set("password", pass)
 	v.Set("sender", sender)
 	v.Set("message", text)
 	rb := *strings.NewReader(v.Encode())
@@ -56,14 +58,16 @@ func tele2(phone string, login string, password string, sender string, text stri
 
 }
 
-func megafon(phone string, login string, password string, sender string, text string) {
+func megafon(phone string, sender string, text string) {
+	login, pass := sms()
+
 	// Set variable values
 	gatewayURL := "https://a2p-api.megalabs.ru/"
 
 	//В заголовке передаются авторизационные данные в формате login:pass закодированные Base64. Например, cG8nbX54dGAyqx==.
 	urlStr := gatewayURL + "/sms/v1/sms" +
 		"&login=" + login +
-		"&password=" + password +
+		"&password=" + pass +
 		"&shortcode=" + sender +
 		"&text=" + text
 
@@ -76,7 +80,7 @@ func megafon(phone string, login string, password string, sender string, text st
 	v := url.Values{}
 	v.Set("to", phone)
 	v.Set("login", login)
-	v.Set("password", password)
+	v.Set("password", pass)
 	v.Set("sender", sender)
 	v.Set("message", text)
 	rb := *strings.NewReader(v.Encode())
@@ -93,7 +97,9 @@ func megafon(phone string, login string, password string, sender string, text st
 
 }
 
-func mts(phone string, login string, password string, sender string, text string) {
+func mts(phone string, sender string, text string) {
+
+	login, pass := sms()
 
 	/* HTTP GET
 	   The following is a sample HTTP GET request and response. The placeholders shown need to be replaced with actual values.
@@ -130,13 +136,13 @@ func mts(phone string, login string, password string, sender string, text string
 		"&message=" + text +
 		"&naming=" + sender +
 		"&login=" + login +
-		"&password=" + password
+		"&password=" + pass
 
 	// Params
 	v := url.Values{}
 	v.Set("to", phone)
 	v.Set("login", login)
-	v.Set("password", password)
+	v.Set("password", pass)
 	v.Set("sender", sender)
 	v.Set("message", text)
 	rb := *strings.NewReader(v.Encode())
