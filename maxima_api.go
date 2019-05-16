@@ -34,7 +34,17 @@ func maxima() string {
 
 }
 
+type reg struct {
+	Command     string
+	Number      string
+	CustID      string
+	RegDateTime string
+	QNT         string
+	WaitTime    string
+}
+
 // Регистрация талона
+// func register(serid, custdata, note, priorid, toid string) *reg {
 func register(serid, custdata, note, priorid, toid string) {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
 	// response
@@ -62,6 +72,8 @@ func register(serid, custdata, note, priorid, toid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	// return resp
 
 }
 
@@ -94,8 +106,17 @@ func multiRegisters(servcount, langid, custdata, note string) {
 	fmt.Println(resp.Status)
 }
 
+type sr_Register struct {
+	Command     string
+	CheckResult string
+	Number      string
+	CustID      string
+	RegDateTime string
+	ResultCode  string
+}
+
 // Регистрация на предварительную запись
-func sr_Register(servid, custdata, note, priorid, calltime string) {
+func srReg(servid, custdata, note, priorid, calltime string) {
 	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
 	// response
 	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"6","CustID":"49462","RegDateTime":"10.05.2019 12:00:00","ResultCode":"0"}
@@ -220,6 +241,23 @@ func getConfig() {
 	fmt.Println(resp.Status)
 }
 
+type getTickStp struct {
+	Command     string
+	TicketSteps struct {
+		TicketStepID string
+		TicketNo     string
+		CustID       string
+		CustData     string
+		SourceKind   string
+		State        string
+		RegTime      string
+		CallTime     string
+		PriorityID   string
+		QualityMark  string
+	}
+	ResultCode string
+}
+
 // Получение списка талонов
 func getTicketSteps(state string) {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
@@ -244,6 +282,12 @@ func getTicketSteps(state string) {
 
 	//print response
 	fmt.Println(resp.Status)
+}
+
+type getSRTickStp struct {
+	Command       string
+	SRTicketSteps string
+	ResultCode    string
 }
 
 // Получение списка талонов по предварительной записи
@@ -273,6 +317,16 @@ func getSRTicketSteps(srdata string) {
 
 	//print response
 	fmt.Println(resp.Status)
+}
+
+type getLan struct {
+	Command   string
+	Languages struct {
+		ID        string
+		Name      string
+		ShortName string
+	}
+	ResultCode string
 }
 
 // Получение еастройки языка
