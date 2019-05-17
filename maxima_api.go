@@ -17,6 +17,80 @@ type ConfigMax struct {
 	Port string
 }
 
+/* type Station struct {
+	Id                    int64   `json:"id"`
+	StationName           string  `json:"stationName"`
+	AvailableDocks        int64   `json:"availableDocks"`
+	TotalDocks            int64   `json:"totalDocks"`
+	Latitude              float64 `json:"latitude"`
+	Longitude             float64 `json:"longitude"`
+	StatusValue           string  `json:"statusValue"`
+	StatusKey             int64   `json:"statusKey"`
+	AvailableBikes        int64   `json:"availableBikes"`
+	StAddress1            string  `json:"stAddress1"`
+	StAddress2            string  `json:"stAddress2"`
+	City                  string  `json:"city"`
+	PostalCode            string  `json:"postalCode"`
+	Location              string  `json:"location"`
+	Altitude              string  `json:"altitude"`
+	TestStation           bool    `json:"testStation"`
+	LastCommunicationTime string  `json:"lastCommunicationTime"`
+	LandMark              string  `json:"landMark"`
+}
+
+type StationAPIResponse struct {
+	ExecutionTime   string    `json:"executionTime"`
+	StationBeanList []Station `json:"stationBeanList"`
+}
+
+func getStations(body []byte) (*StationAPIResponse, error) {
+	var s = new(StationAPIResponse)
+	err := json.Unmarshal(body, &s)
+	if err != nil {
+		fmt.Println("whoops:", err)
+	}
+	return s, err
+} */
+
+/* func jsonrespons() {
+
+	res, err := http.Get("https://www.citibikenyc.com/stations/json")
+	if err != nil {
+		panic(err.Error())
+	}
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	s, err := getStations([]byte(body))
+} */
+
+/* {
+executionTime: "2015-11-09 12:47:01 PM",
+stationBeanList: [
+{
+id: 72,
+stationName: "W 52 St & 11 Ave",
+availableDocks: 37,
+totalDocks: 39,
+latitude: 40.76727216,
+longitude: -73.99392888,
+statusValue: "In Service",
+statusKey: 1,
+availableBikes: 1,
+stAddress1: "W 52 St & 11 Ave",
+stAddress2: "",
+city: "",
+postalCode: "",
+location: "",
+altitude: "",
+testStation: false,
+lastCommunicationTime: "2015-11-09 12:46:53 PM",
+landMark: ""
+}, */
+
 // чтение конфигурационного файла
 func maxima() string {
 	// MAXIMA
@@ -35,12 +109,12 @@ func maxima() string {
 }
 
 type reg struct {
-	Command     string
-	Number      string
-	CustID      string
-	RegDateTime string
-	QNT         string
-	WaitTime    string
+	Command     string `json:"Command"`
+	Number      string `json:"Number"`
+	CustID      string `json:"CustID"`
+	RegDateTime string `json:"RegDateTime"`
+	QNT         string `json:"QNT"`
+	WaitTime    string `json:"WaitTime"`
 }
 
 // Регистрация талона
@@ -107,12 +181,12 @@ func multiRegisters(servcount, langid, custdata, note string) {
 }
 
 type sr_Register struct {
-	Command     string
-	CheckResult string
-	Number      string
-	CustID      string
-	RegDateTime string
-	ResultCode  string
+	Command     string `json:"Command"`
+	CheckResult string `json:"CheckResult"`
+	Number      string `json:"Number"`
+	CustID      string `json:"CustID"`
+	RegDateTime string `json:"RegDateTime"`
+	ResultCode  string `json:"ResultCode"`
 }
 
 // Регистрация на предварительную запись
@@ -242,18 +316,18 @@ func getConfig() {
 }
 
 type getTickStp struct {
-	Command     string
+	Command     string `json:"Command"`
 	TicketSteps struct {
-		TicketStepID string
-		TicketNo     string
-		CustID       string
-		CustData     string
-		SourceKind   string
-		State        string
-		RegTime      string
-		CallTime     string
-		PriorityID   string
-		QualityMark  string
+		TicketStepID string `json:"TicketStepID"`
+		TicketNo     string `json:"TicketNo"`
+		CustID       string `json:"CustID"`
+		CustData     string `json:"CustData"`
+		SourceKind   string `json:"SourceKind"`
+		State        string `json:"State"`
+		RegTime      string `json:"RegTime"`
+		CallTime     string `json:"CallTime"`
+		PriorityID   string `json:"PriorityID"`
+		QualityMark  string `json:"QualityMark"`
 	}
 	ResultCode string
 }
@@ -285,9 +359,9 @@ func getTicketSteps(state string) {
 }
 
 type getSRTickStp struct {
-	Command       string
-	SRTicketSteps string
-	ResultCode    string
+	Command       string `json:"Command"`
+	SRTicketSteps string `json:"SRTicketSteps"`
+	ResultCode    string `json:"ResultCode"`
 }
 
 // Получение списка талонов по предварительной записи
@@ -320,13 +394,13 @@ func getSRTicketSteps(srdata string) {
 }
 
 type getLan struct {
-	Command   string
+	Command   string `json:"Command"`
 	Languages struct {
-		ID        string
-		Name      string
-		ShortName string
+		ID        string `json:"ID"`
+		Name      string `json:"Name"`
+		ShortName string `json:"ShortName"`
 	}
-	ResultCode string
+	ResultCode string `json:"ResultCode	"`
 }
 
 // Получение еастройки языка
