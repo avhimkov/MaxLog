@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -36,11 +37,11 @@ type ConfigMax struct {
 	TestStation           bool    `json:"testStation"`
 	LastCommunicationTime string  `json:"lastCommunicationTime"`
 	LandMark              string  `json:"landMark"`
-}
+} */
 
 type StationAPIResponse struct {
-	ExecutionTime   string    `json:"executionTime"`
-	StationBeanList []Station `json:"stationBeanList"`
+	ExecutionTime string `json:"executionTime"`
+	/* StationBeanList []Station `json:"stationBeanList"` */
 }
 
 func getStations(body []byte) (*StationAPIResponse, error) {
@@ -50,11 +51,13 @@ func getStations(body []byte) (*StationAPIResponse, error) {
 		fmt.Println("whoops:", err)
 	}
 	return s, err
-} */
+}
 
-/* func jsonrespons() {
+func jsonrespons() {
 
-	res, err := http.Get("https://www.citibikenyc.com/stations/json")
+	urlStr := gatewayURL
+
+	res, err := http.Get(urlStr)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -65,7 +68,8 @@ func getStations(body []byte) (*StationAPIResponse, error) {
 	}
 
 	s, err := getStations([]byte(body))
-} */
+	fmt.Println(s)
+}
 
 /* {
 executionTime: "2015-11-09 12:47:01 PM",
@@ -89,7 +93,8 @@ altitude: "",
 testStation: false,
 lastCommunicationTime: "2015-11-09 12:46:53 PM",
 landMark: ""
-}, */
+},
+*/
 
 // чтение конфигурационного файла
 func maxima() string {
