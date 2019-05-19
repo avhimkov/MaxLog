@@ -13,17 +13,21 @@
                 <div class="col">
                     <h6>Найти услугу</h6>
                     <label class="sr-only" for="inlineFormInput">Название услуги</label>
-                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0" id="serviceid"></input>
                 </div>
                 <div class="col">
-                    <h6>Окна</h6>
+                    <h6>Выбор окна</h6>
                     <label class="sr-only" for="inlineFormInput">Окна</label>
                     <select class="custom-select">
                     <!-- <select class="custom-select" multiple> -->
                                     <!-- <option selected>Open this select menu</option> -->
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="1">OKNO 1</option>
+                                    <option value="2">OKNO 2</option>
+                                    <option value="3">OKNO 3</option>
+                                    <option value="4">OKNO 4</option>
+                                    <option value="5">OKNO 5</option>
+                                    <option value="6">OKNO 6</option>
+                                    <option value="7">OKNO 7</option>
                     </select>
                 </div>
             </div>
@@ -51,7 +55,6 @@
                     $(function() {
 
                         $(".search-input").keyup(function() {
-
                             var searchString = $(this).val();
                             console.log(searchString);
                             $('#jstree').jstree('search', searchString);
@@ -61,7 +64,139 @@
                         $('#jstree').jstree({
                             'core': {
 
-                                'data': []
+                                'data': [{
+                                    "id": "1.0",
+                                    "text": "Fresh Products",
+                                    "icon": "",
+                                    "state": {
+                                        "opened": false,
+                                        "disabled": false,
+                                        "selected": false
+                                    },
+                                    "children": [{
+                                        "id": "2.06.0",
+                                        "text": "Ethnic & Specialty",
+                                        "icon": "",
+                                        "state": {
+                                            "opened": false,
+                                            "disabled": false,
+                                            "selected": false
+                                        },
+                                        "children": false,
+                                        "liAttributes": null,
+                                        "aAttributes": null
+                                    }, {
+                                        "id": "2.07.0",
+                                        "text": "Natural & Organic",
+                                        "icon": "",
+                                        "state": {
+                                            "opened": false,
+                                            "disabled": false,
+                                            "selected": false
+                                        },
+                                        "children": false,
+                                        "liAttributes": null,
+                                        "aAttributes": null
+                                    }, {
+                                        "id": "2.08.0",
+                                        "text": "Prepared Foods",
+                                        "icon": "",
+                                        "state": {
+                                            "opened": false,
+                                            "disabled": false,
+                                            "selected": false
+                                        },
+                                        "children": false,
+                                        "liAttributes": null,
+                                        "aAttributes": null
+                                    }, {
+                                        "id": "2.09.0",
+                                        "text": "Seafood",
+                                        "icon": "",
+                                        "state": {
+                                            "opened": false,
+                                            "disabled": false,
+                                            "selected": false
+                                        },
+                                        "children": false,
+                                        "liAttributes": null,
+                                        "aAttributes": null
+                                    }, {
+                                        "id": "2.010.0",
+                                        "text": "Seafood",
+                                        "icon": "",
+                                        "state": {
+                                            "opened": false,
+                                            "disabled": false,
+                                            "selected": false
+                                        },
+                                        "children": false,
+                                        "liAttributes": null,
+                                        "aAttributes": null
+                                    }],
+                                    "liAttributes": null,
+                                    "aAttributes": null
+                                }, {
+                                    "id": "2.0",
+                                    "text": "Frozen Products",
+                                    "icon": "",
+                                    "state": {
+                                        "opened": false,
+                                        "disabled": false,
+                                        "selected": false
+                                    },
+                                    "children": [],
+                                    "liAttributes": null,
+                                    "aAttributes": null
+                                }, {
+                                    "id": "3.0",
+                                    "text": "Store Equipment ",
+                                    "icon": "",
+                                    "state": {
+                                        "opened": false,
+                                        "disabled": false,
+                                        "selected": false
+                                    },
+                                    "children": [],
+                                    "liAttributes": null,
+                                    "aAttributes": null
+                                }, {
+                                    "id": "4.0",
+                                    "text": "Packaged Grocery",
+                                    "icon": "",
+                                    "state": {
+                                        "opened": false,
+                                        "disabled": false,
+                                        "selected": false
+                                    },
+                                    "children": [],
+                                    "liAttributes": null,
+                                    "aAttributes": null
+                                }, {
+                                    "id": "5.0",
+                                    "text": "Retail Technology",
+                                    "icon": "",
+                                    "state": {
+                                        "opened": false,
+                                        "disabled": false,
+                                        "selected": false
+                                    },
+                                    "children": [],
+                                    "liAttributes": null,
+                                    "aAttributes": null
+                                }, {
+                                    "id": "6.0",
+                                    "text": "HBC/Non-Foods",
+                                    "icon": "",
+                                    "state": {
+                                        "opened": false,
+                                        "disabled": false,
+                                        "selected": false
+                                    },
+                                    "children": [],
+                                    "liAttributes": null,
+                                    "aAttributes": null
+                                }]
 
                             },
                             "search": {
@@ -80,31 +215,34 @@
                 <div class="col">
                     <h6>ФИО посетителя</h6>
                     <label class="sr-only" for="inlineFormInput">ФИО посетителя</label>
-                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0" id="fio"></input>
                 </div>
+            </div>
+            <div class="form-row">
                 <div class="col">
                     <h6>Коментарий</h6>
                     <label class="sr-only" for="inlineFormInput">Коментарий</label>
-                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0"></input>
+                    <input class="search-input form-control mr-sm-2 mb-2 mb-sm-0" id="comment"></input>
                 </div>
             </div>
-            <p></p>
-            <div class="form-row text-right">
-                <div class="col-12">
-                    <div class="modal-footer ">
-                        <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">Создать</button>
-                        <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">Записать на время</button>
-                    </div>
-                    <!-- <form action="/removeval/Person/" method="GET">
+        </div>
+        <p></p>
+        <div class="form-row text-right">
+            <div class="col-12">
+                <div class="modal-footer ">
+                    <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">Создать</button>
+                    <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;">Записать на время</button>
+                </div>
+                <!-- <form action="/removeval/Person/" method="GET">
                         <button class="btn btn-danger btn-rounded btn-sm my-0" type="submit"><i class="fas fa-sign-in-alt"></i></button>
                     </form> -->
-                </div>
             </div>
-            <p></p>
         </div>
     </div>
-    <p></p>
+</div>
 
+<div class="container-fluid">
+    <p></p>
     <div class="card">
         <h3 class="card-header panel-success white-text">Список заявлений</h3>
         <div class="card-body">
@@ -132,8 +270,8 @@
                     </script>
                 </thead>
                 <tbody>
-                    {{range $i, $e := .person}}
 
+                    {{range $i, $e := .person}}
                     <!-- hide modal window -->
                     <div class="modal fade" id="edit{{$e.ID}}" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -242,146 +380,13 @@
             </table>
         </div>
     </div>
+</div>
 
-    <script>
-        $('#table').tableExport({
-            type: 'excel'
-        });
-    </script>
+<script>
+    $('#table').tableExport({
+        type: 'excel'
+    });
+</script>
 
-    <!--Embed the footer.html template at this location-->
-    {{ template "footer.html" .}}
-
-    <!--     [{
-        "id": "1.0",
-        "text": "Fresh Products",
-        "icon": "",
-        "state": {
-            "opened": false,
-            "disabled": false,
-            "selected": false
-        },
-        "children": [{
-            "id": "2.06.0",
-            "text": "Ethnic & Specialty",
-            "icon": "",
-            "state": {
-                "opened": false,
-                "disabled": false,
-                "selected": false
-            },
-            "children": false,
-            "liAttributes": null,
-            "aAttributes": null
-        }, {
-            "id": "2.07.0",
-            "text": "Natural & Organic",
-            "icon": "",
-            "state": {
-                "opened": false,
-                "disabled": false,
-                "selected": false
-            },
-            "children": false,
-            "liAttributes": null,
-            "aAttributes": null
-        }, {
-            "id": "2.08.0",
-            "text": "Prepared Foods",
-            "icon": "",
-            "state": {
-                "opened": false,
-                "disabled": false,
-                "selected": false
-            },
-            "children": false,
-            "liAttributes": null,
-            "aAttributes": null
-        }, {
-            "id": "2.09.0",
-            "text": "Seafood",
-            "icon": "",
-            "state": {
-                "opened": false,
-                "disabled": false,
-                "selected": false
-            },
-            "children": false,
-            "liAttributes": null,
-            "aAttributes": null
-        }, {
-            "id": "2.010.0",
-            "text": "Seafood",
-            "icon": "",
-            "state": {
-                "opened": false,
-                "disabled": false,
-                "selected": false
-            },
-            "children": false,
-            "liAttributes": null,
-            "aAttributes": null
-        }],
-        "liAttributes": null,
-        "aAttributes": null
-    }, {
-        "id": "2.0",
-        "text": "Frozen Products",
-        "icon": "",
-        "state": {
-            "opened": false,
-            "disabled": false,
-            "selected": false
-        },
-        "children": [],
-        "liAttributes": null,
-        "aAttributes": null
-    }, {
-        "id": "3.0",
-        "text": "Store Equipment ",
-        "icon": "",
-        "state": {
-            "opened": false,
-            "disabled": false,
-            "selected": false
-        },
-        "children": [],
-        "liAttributes": null,
-        "aAttributes": null
-    }, {
-        "id": "4.0",
-        "text": "Packaged Grocery",
-        "icon": "",
-        "state": {
-            "opened": false,
-            "disabled": false,
-            "selected": false
-        },
-        "children": [],
-        "liAttributes": null,
-        "aAttributes": null
-    }, {
-        "id": "5.0",
-        "text": "Retail Technology",
-        "icon": "",
-        "state": {
-            "opened": false,
-            "disabled": false,
-            "selected": false
-        },
-        "children": [],
-        "liAttributes": null,
-        "aAttributes": null
-    }, {
-        "id": "6.0",
-        "text": "HBC/Non-Foods",
-        "icon": "",
-        "state": {
-            "opened": false,
-            "disabled": false,
-            "selected": false
-        },
-        "children": [],
-        "liAttributes": null,
-        "aAttributes": null
-    }] -->
+<!--Embed the footer.html template at this location-->
+{{ template "footer.html" .}}

@@ -338,7 +338,7 @@ type getTickStp struct {
 }
 
 // Получение списка талонов
-func getTicketSteps(state string) {
+func getTicketSteps(state string) string {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
 	// response
 	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
@@ -361,6 +361,10 @@ func getTicketSteps(state string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	respons := "'Command':'cmd_GetTicketSteps'"
+
+	return respons
 }
 
 type getSRTickStp struct {
