@@ -225,6 +225,19 @@ func srReg(servid, custdata, note, priorid, calltime string) {
 	fmt.Println(resp.Status)
 }
 
+type workplace struct {
+	Command    string `json:"Command"`
+	Workplaces struct {
+		ID      string `json:"ID"`
+		Name    string `json:"Name"`
+		PlaceNo string `json:"PlaceNo"`
+		IDCon   string `json:"IDCon"`
+		Active  string `json:"Active"`
+		State   string `json:"State"`
+	}
+	ResultCode string `json:"ResultCode"`
+}
+
 // Получение рабочие места
 func getWorkplaces() {
 	// command=cmd_GetWorkplaces
@@ -249,6 +262,23 @@ func getWorkplaces() {
 
 }
 
+type service struct {
+	Command string `json:"Command"`
+	Groups  struct {
+		ID             string `json:"ID"`
+		Visible        string `json:"Visible"`
+		Type           string `json:"Type"`
+		Level          string `json:"Level"`
+		ShowElement    string `json:"ShowElement"`
+		SR_ShowElement string `json:"SR_ShowElement"`
+		OrderNum       string `json:"OrderNum"`
+		Name           string `json:"Name"`
+		NeedPriorityID string `json:"NeedPriorityID"`
+		ParentID       string `json:"ParentID"`
+	}
+	ResultCode string `json:"ResultCode"`
+}
+
 // Получение список услуг
 func getServices(typeofmenu, langid string) {
 	// command=cmd_getservices&TypeOfMenu=2&LanguageID=0
@@ -271,6 +301,30 @@ func getServices(typeofmenu, langid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+}
+
+type serviceid struct {
+	Command string `json:"Command"`
+	Service struct {
+		Name string `json:"Name"`
+	}
+	HandlingWP struct {
+		ID                string `json:"ID"`
+		Name              string `json:"Name"`
+		Active            string `json:"Active"`
+		BlockedForRegTurn string `json:"BlockedForRegTurn"`
+		BlockedForRegSR   string `json:"BlockedForRegSR"`
+	}
+	Schedule struct {
+		StartDate string `json:"StartDate"`
+		EndDate   string `json:"EndDate"`
+		Days      struct {
+			Day       string `json:"Day"`
+			StartTime string `json:"StartTime"`
+			EndTime   string `json:"EndTime"`
+		}
+	}
+	ResultCode string `json:"ResultCode"`
 }
 
 // Получение инфорамии об услуге по ID
