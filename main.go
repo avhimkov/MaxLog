@@ -54,7 +54,8 @@ func main() {
 	*/
 
 	g := SetupRouter()
-	g.GET("/", indexPage)
+	g.GET("/", indexPageGet)
+	g.POST("/", indexPagePost)
 
 	// 404 page
 	g.NoRoute(func(c *gin.Context) {

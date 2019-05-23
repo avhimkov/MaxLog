@@ -21,23 +21,18 @@ type ConfigMax struct {
 /* type Station struct {
 	Id                    int64   `json:"id"`
 	StationName           string  `json:"stationName"`
-	AvailableDocks        int64   `json:"availableDocks"`
-	TotalDocks            int64   `json:"totalDocks"`
-	Latitude              float64 `json:"latitude"`
-	Longitude             float64 `json:"longitude"`
-	StatusValue           string  `json:"statusValue"`
-	StatusKey             int64   `json:"statusKey"`
-	AvailableBikes        int64   `json:"availableBikes"`
-	StAddress1            string  `json:"stAddress1"`
-	StAddress2            string  `json:"stAddress2"`
-	City                  string  `json:"city"`
-	PostalCode            string  `json:"postalCode"`
-	Location              string  `json:"location"`
-	Altitude              string  `json:"altitude"`
-	TestStation           bool    `json:"testStation"`
-	LastCommunicationTime string  `json:"lastCommunicationTime"`
 	LandMark              string  `json:"landMark"`
 } */
+
+// {
+// executionTime: "2015-11-09 12:47:01 PM",
+// stationBeanList: [
+// {
+// id: 72,
+// stationName: "W 52 St & 11 Ave",
+// lastCommunicationTime: "2015-11-09 12:46:53 PM",
+// landMark: ""
+// },
 
 type StationAPIResponse struct {
 	ExecutionTime string `json:"executionTime"`
@@ -71,31 +66,6 @@ func jsonrespons() {
 	fmt.Println(s)
 }
 
-/* {
-executionTime: "2015-11-09 12:47:01 PM",
-stationBeanList: [
-{
-id: 72,
-stationName: "W 52 St & 11 Ave",
-availableDocks: 37,
-totalDocks: 39,
-latitude: 40.76727216,
-longitude: -73.99392888,
-statusValue: "In Service",
-statusKey: 1,
-availableBikes: 1,
-stAddress1: "W 52 St & 11 Ave",
-stAddress2: "",
-city: "",
-postalCode: "",
-location: "",
-altitude: "",
-testStation: false,
-lastCommunicationTime: "2015-11-09 12:46:53 PM",
-landMark: ""
-},
-*/
-
 // чтение конфигурационного файла
 func maxima() string {
 	// MAXIMA
@@ -110,7 +80,6 @@ func maxima() string {
 	uri := "http://" + configurationMax.IP + ":5612/QMSSR"
 
 	return uri
-
 }
 
 type reg struct {
@@ -123,8 +92,7 @@ type reg struct {
 }
 
 // Регистрация талона
-// func register(serid, custdata, note, priorid, toid string) *reg {
-func register(serid, custdata, note, priorid, toid string) {
+func register(serid, custdata, note, priorid, toid string) /* *reg */ {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
 	// response
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
@@ -152,7 +120,7 @@ func register(serid, custdata, note, priorid, toid string) {
 	//print response
 	fmt.Println(resp.Status)
 
-	// return resp
+	// return reg
 
 }
 
@@ -185,7 +153,8 @@ func multiRegisters(servcount, langid, custdata, note string) {
 	fmt.Println(resp.Status)
 }
 
-type sr_Register struct {
+// sr_Register
+type srRegister struct {
 	Command     string `json:"Command"`
 	CheckResult string `json:"CheckResult"`
 	Number      string `json:"Number"`
@@ -270,7 +239,7 @@ type service struct {
 		Type           string `json:"Type"`
 		Level          string `json:"Level"`
 		ShowElement    string `json:"ShowElement"`
-		SR_ShowElement string `json:"SR_ShowElement"`
+		SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
 		OrderNum       string `json:"OrderNum"`
 		Name           string `json:"Name"`
 		NeedPriorityID string `json:"NeedPriorityID"`
@@ -527,7 +496,8 @@ func getGetWorkusers(id, name, last, patronimyc string) {
 }
 
 // Получение информации о предварительной записи по пинкоду
-func getSR_InformationByPIN(pin string) {
+//getSR_InformationByPIN
+func getSRInformationByPIN(pin string) {
 	// command=cmd_SR_InformationByPIN
 	// response
 
@@ -669,7 +639,8 @@ func srDelTicketStep(srtikcetstepid string) {
 }
 
 // Регистрация талона предварительной записи по пин коду
-func sr_RegisterByPIN(pin string) {
+// sr_RegisterByPIN
+func srRegisterByPIN(pin string) {
 	// command=cmd_SR_RegisterByPIN
 	// response
 
@@ -692,12 +663,3 @@ func sr_RegisterByPIN(pin string) {
 	//print response
 	fmt.Println(resp.Status)
 }
-
-// 			// Проверка соединения с сервером
-// 			checkConnection: function () {
-// 				var self = this;
-// 				$.ajax({
-// 					async: true,
-// 					dataType: "json",
-// 				});
-// 			},

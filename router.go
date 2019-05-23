@@ -8,13 +8,14 @@ import (
 
 func indexPageGet(c *gin.Context) {
 
-	fio := c.PostForm("fio")
-	comment := c.PostForm("comment")
-	serviceid := c.PostForm("serviceid")
-	register(serviceid, fio, comment, "0", "")
+	// fio := c.PostForm("fio")
+	// comment := c.PostForm("comment")
+	// serviceid := c.PostForm("serviceid")
+	// register(serviceid, fio, comment, "0", "")
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
 
-	http.Redirect(c.Writer, c.Request, "/terminal", 302)
+	c.HTML(http.StatusOK, "terminal.html", gin.H{})
+	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
 }
 
 func indexPagePost(c *gin.Context) {
