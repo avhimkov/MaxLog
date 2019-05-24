@@ -8,6 +8,14 @@ import (
 
 func indexPageGet(c *gin.Context) {
 
+	/*
+		// sms
+		tele2("79827468271", login, pass, "MFC", "Hello")
+
+		// push
+		SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
+	*/
+
 	// fio := c.PostForm("fio")
 	// comment := c.PostForm("comment")
 	// serviceid := c.PostForm("serviceid")

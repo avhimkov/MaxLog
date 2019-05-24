@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -16,54 +15,6 @@ var gatewayURL = maxima()
 type ConfigMax struct {
 	IP   string
 	Port string
-}
-
-/* type Station struct {
-	Id                    int64   `json:"id"`
-	StationName           string  `json:"stationName"`
-	LandMark              string  `json:"landMark"`
-} */
-
-// {
-// executionTime: "2015-11-09 12:47:01 PM",
-// stationBeanList: [
-// {
-// id: 72,
-// stationName: "W 52 St & 11 Ave",
-// lastCommunicationTime: "2015-11-09 12:46:53 PM",
-// landMark: ""
-// },
-
-type StationAPIResponse struct {
-	ExecutionTime string `json:"executionTime"`
-	/* StationBeanList []Station `json:"stationBeanList"` */
-}
-
-func getStations(body []byte) (*StationAPIResponse, error) {
-	var s = new(StationAPIResponse)
-	err := json.Unmarshal(body, &s)
-	if err != nil {
-		fmt.Println("whoops:", err)
-	}
-	return s, err
-}
-
-func jsonrespons() {
-
-	urlStr := gatewayURL
-
-	res, err := http.Get(urlStr)
-	if err != nil {
-		panic(err.Error())
-	}
-
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		panic(err.Error())
-	}
-
-	s, err := getStations([]byte(body))
-	fmt.Println(s)
 }
 
 // чтение конфигурационного файла

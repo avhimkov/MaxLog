@@ -43,15 +43,6 @@ func SetupRouter() *gin.Engine {
 }
 
 func main() {
-	/*
-		register("289", "name", "", "0", "6")
-
-		// sms
-		tele2("79827468271", login, pass, "MFC", "Hello")
-
-		// push
-		SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
-	*/
 
 	g := SetupRouter()
 	g.GET("/", indexPageGet)
