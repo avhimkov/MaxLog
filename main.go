@@ -1,7 +1,10 @@
 package main
 
 import (
+	"log"
 	"net/http"
+
+	"github.com/asdine/storm"
 
 	"github.com/gin-gonic/gin"
 )
@@ -40,6 +43,24 @@ func SetupRouter() *gin.Engine {
 	// g.Use(permissionHandler)
 
 	return g
+}
+
+var db = DB()
+
+//middlleware db
+// var perm, err = perminit("db/bolt.db")
+
+//middlleware var
+// var userstate = perm.UserState()
+// var permissionHandler = permHandler()
+
+//open databas
+func DB() *storm.DB {
+	db, err := storm.Open("db/data.db")
+	if err != nil {
+		log.Fatal(err)
+	}
+	return db
 }
 
 func main() {
