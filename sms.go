@@ -10,6 +10,11 @@ import (
 	"strings"
 )
 
+type ConfigSMS struct {
+	Login    string
+	Password string
+}
+
 func sms() (string, string) {
 	fileSMS, _ := os.Open("config/configsms.json")
 	decoderSMS := json.NewDecoder(fileSMS)
