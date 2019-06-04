@@ -30,6 +30,7 @@ func maxima() string {
 
 	uri := "http://" + configurationMax.IP + ":5612/QMSSR"
 
+	fmt.Println(uri)
 	return uri
 }
 
@@ -43,7 +44,7 @@ type reg struct {
 }
 
 // Регистрация талона
-func register(serid, custdata, note, priorid, toid string) /* *reg */ {
+func Register(serid, custdata, note, priorid, toid string) string /* *reg */ {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
 	// response
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
@@ -71,7 +72,9 @@ func register(serid, custdata, note, priorid, toid string) /* *reg */ {
 	//print response
 	fmt.Println(resp.Status)
 
-	// return reg
+	respons := "'Command':'cmd_Register'"
+
+	return respons
 
 }
 

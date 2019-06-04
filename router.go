@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -28,9 +29,12 @@ func indexPageGet(c *gin.Context) {
 
 func indexPagePost(c *gin.Context) {
 
-	tiketList := getTicketSteps("0,5,6")
+	// tiketList := getTicketSteps("3")
+	tiketList := Register("289", "Vany2", "", "0", "")
 	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
 	// "SourceKind":"1","State":"0","ServiceID":"190","RegTime":"08.05.2019 14:14:40","CallTime":"01.01.2000","PriorityID":"0","QualityMark":"0"}],"ResultCode":"0"}
 
 	c.HTML(http.StatusOK, "terminal.html", gin.H{"tiketList": tiketList})
+	fmt.Println(tiketList)
+
 }
