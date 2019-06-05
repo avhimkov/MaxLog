@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -71,6 +72,17 @@ func Register(serid, custdata, note, priorid, toid string) string /* *reg */ {
 
 	//print response
 	fmt.Println(resp.Status)
+	//fmt.Println(resp.Body)
+	/*
+		if err != nil {
+			fmt.Println(err)
+			return
+		} */
+	/* defer resp.Body.Close()
+	io.Copy(os.Stdout, resp.Body) */
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
 
 	respons := "'Command':'cmd_Register'"
 
@@ -81,7 +93,7 @@ func Register(serid, custdata, note, priorid, toid string) string /* *reg */ {
 // Регистрация нескольких талонов
 // multiRegister() - если в первой выбранной услуге указываться RegToId, то у всех последующих
 // выбранных услугах, у которых RegToId не указан будет тот же RegToId, что и у первой услуги.
-func multiRegisters(servcount, langid, custdata, note string) {
+func multiRegisters(servcount, langid, custdata, note string) string {
 	// command=cmd_Registers
 	// response
 
@@ -105,6 +117,13 @@ func multiRegisters(servcount, langid, custdata, note string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'multiRegisters'"
+
+	return respons
 }
 
 // sr_Register
@@ -118,7 +137,7 @@ type srRegister struct {
 }
 
 // Регистрация на предварительную запись
-func srReg(servid, custdata, note, priorid, calltime string) {
+func srReg(servid, custdata, note, priorid, calltime string) string {
 	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
 	// response
 	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"6","CustID":"49462","RegDateTime":"10.05.2019 12:00:00","ResultCode":"0"}
@@ -146,6 +165,13 @@ func srReg(servid, custdata, note, priorid, calltime string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'srReg'"
+
+	return respons
 }
 
 type workplace struct {
@@ -162,7 +188,7 @@ type workplace struct {
 }
 
 // Получение рабочие места
-func getWorkplaces() {
+func getWorkplaces() string {
 	// command=cmd_GetWorkplaces
 
 	// gatewayURL := maxima()
@@ -182,6 +208,13 @@ func getWorkplaces() {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getWorkplace'"
+
+	return respons
 
 }
 
@@ -203,7 +236,7 @@ type service struct {
 }
 
 // Получение список услуг
-func getServices(typeofmenu, langid string) {
+func getServices(typeofmenu, langid string) string {
 	// command=cmd_getservices&TypeOfMenu=2&LanguageID=0
 	// response in file getService.json
 	urlStr := gatewayURL
@@ -224,6 +257,13 @@ func getServices(typeofmenu, langid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'GetService'"
+
+	return respons
 }
 
 type serviceid struct {
@@ -251,7 +291,7 @@ type serviceid struct {
 }
 
 // Получение инфорамии об услуге по ID
-func getServiceByID(servid string) {
+func getServiceByID(servid string) string {
 	// command=cmd_GetServiceByID&GetHandlingWPorWU=1&ServiceID=289&GetWaitingCountPerWPOrWU=1
 	// response in file getServiceByID.json
 
@@ -274,10 +314,17 @@ func getServiceByID(servid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getServiceByID'"
+
+	return respons
 }
 
 // Получение конфигурации
-func getConfig() {
+func getConfig() string {
 	// command=cmd_getconfig
 	urlStr := gatewayURL
 
@@ -295,6 +342,13 @@ func getConfig() {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'GetConfig'"
+
+	return respons
 }
 
 type getTickStp struct {
@@ -339,7 +393,10 @@ func getTicketSteps(state string) string {
 	//print response
 	fmt.Println(resp.Status)
 
-	respons := "'Command':'cmd_GetTicketSteps'"
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'GetTicketSteps'"
 
 	return respons
 }
@@ -351,7 +408,7 @@ type getSRTickStp struct {
 }
 
 // Получение списка талонов по предварительной записи
-func getSRTicketSteps(srdata string) {
+func getSRTicketSteps(srdata string) string {
 	// command=cmd_GetSRTicketSteps&SRDate=02.05.2019
 	// response
 	// {"Command":"cmd_GetSRTicketSteps","SRTicketSteps":[],"ResultCode":"0"}
@@ -377,6 +434,13 @@ func getSRTicketSteps(srdata string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getSRTicketSteps'"
+
+	return respons
 }
 
 type getLan struct {
@@ -390,7 +454,7 @@ type getLan struct {
 }
 
 // Получение еастройки языка
-func getLanguages() {
+func getLanguages() string {
 	// command=cmd_GetLanguages
 	// response
 	// {"Command":"cmd_GetLanguages","Languages":[{"ID":"0","Name":"Русский","ShortName":"RUS"}],"ResultCode":"0"}
@@ -411,10 +475,17 @@ func getLanguages() {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getLanguages'"
+
+	return respons
 }
 
 // Получение списка пользователей
-func getGetWorkusers(id, name, last, patronimyc string) {
+func getGetWorkusers(id, name, last, patronimyc string) string {
 	// command=cmd_GetWorkusers
 	// response
 
@@ -447,11 +518,18 @@ func getGetWorkusers(id, name, last, patronimyc string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getGetWorkusers'"
+
+	return respons
 }
 
 // Получение информации о предварительной записи по пинкоду
 //getSR_InformationByPIN
-func getSRInformationByPIN(pin string) {
+func getSRInformationByPIN(pin string) string {
 	// command=cmd_SR_InformationByPIN
 	// response
 
@@ -473,10 +551,17 @@ func getSRInformationByPIN(pin string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getSRInformationByPIN'"
+
+	return respons
 }
 
 // получение свободной даты на которую можно сделать предварительную запись
-func getIntervals(servid, datefrom, dateto string) {
+func getIntervals(servid, datefrom, dateto string) string {
 	// command=cmd_GetIntervals
 	// response
 
@@ -505,10 +590,17 @@ func getIntervals(servid, datefrom, dateto string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'getInterval'"
+
+	return respons
 }
 
 // Обнавление статуса талона
-func updateTicketStep(tiketid, state string) {
+func updateTicketStep(tiketid, state string) string {
 	// command=cmd_UpdateTicketStep
 	// response
 
@@ -538,10 +630,17 @@ func updateTicketStep(tiketid, state string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'updateTickets'"
+
+	return respons
 }
 
 // Обнавление статуса талона предварительной записи
-func srUpdateTicketStep(srticketstepid string) {
+func srUpdateTicketStep(srticketstepid string) string {
 	// command=cmd_SRUpdateTicketStep
 	// response
 
@@ -566,10 +665,17 @@ func srUpdateTicketStep(srticketstepid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'srUpdateTicketStep'"
+
+	return respons
 }
 
 // Удаление талона в предварительной записи
-func srDelTicketStep(srtikcetstepid string) {
+func srDelTicketStep(srtikcetstepid string) string {
 	// command=cmd_SRDelTicketStep
 	// response
 
@@ -590,11 +696,18 @@ func srDelTicketStep(srtikcetstepid string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'srDelTicketStep'"
+
+	return respons
 }
 
 // Регистрация талона предварительной записи по пин коду
 // sr_RegisterByPIN
-func srRegisterByPIN(pin string) {
+func srRegisterByPIN(pin string) string {
 	// command=cmd_SR_RegisterByPIN
 	// response
 
@@ -616,4 +729,11 @@ func srRegisterByPIN(pin string) {
 
 	//print response
 	fmt.Println(resp.Status)
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println("response Body:", string(body))
+
+	respons := "'Command':'srRegisterByPIN'"
+
+	return respons
 }
