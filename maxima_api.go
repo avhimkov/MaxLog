@@ -45,7 +45,7 @@ type reg struct {
 }
 
 // Регистрация талона
-func Register(serid, custdata, note, priorid, toid string) string /* *reg */ {
+func Register(serid, custdata, note, priorid, toid string) *reg {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
 	// response
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
@@ -70,24 +70,25 @@ func Register(serid, custdata, note, priorid, toid string) string /* *reg */ {
 	// Make request
 	resp, _ := client.Do(req)
 
-	//print response
+	//print response status
 	fmt.Println(resp.Status)
-	//fmt.Println(resp.Body)
-	/*
-		if err != nil {
-			fmt.Println(err)
-			return
-		} */
-	/* defer resp.Body.Close()
-	io.Copy(os.Stdout, resp.Body) */
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
+	// fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'cmd_Register'"
+	regStruct := reg{}
+	jsonErr := json.Unmarshal(body, &regStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	// fmt.Println(reg1.Number)
+	// respons := "'Command':'cmd_Register'"
 
+	return &regStruct
 }
 
 // Регистрация нескольких талонов
@@ -137,7 +138,7 @@ type srRegister struct {
 }
 
 // Регистрация на предварительную запись
-func srReg(servid, custdata, note, priorid, calltime string) string {
+func srReg(servid, custdata, note, priorid, calltime string) *srRegister {
 	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
 	// response
 	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"6","CustID":"49462","RegDateTime":"10.05.2019 12:00:00","ResultCode":"0"}
@@ -166,12 +167,18 @@ func srReg(servid, custdata, note, priorid, calltime string) string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'srReg'"
+	srRegisterStruct := srRegister{}
+	jsonErr := json.Unmarshal(body, &srRegisterStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	return &srRegisterStruct
 }
 
 type workplace struct {
@@ -188,7 +195,7 @@ type workplace struct {
 }
 
 // Получение рабочие места
-func getWorkplaces() string {
+func getWorkplaces() *workplace {
 	// command=cmd_GetWorkplaces
 
 	// gatewayURL := maxima()
@@ -209,13 +216,18 @@ func getWorkplaces() string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'getWorkplace'"
+	workplaceStruct := workplace{}
+	jsonErr := json.Unmarshal(body, &workplaceStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
-
+	return &workplaceStruct
 }
 
 type service struct {
@@ -236,7 +248,7 @@ type service struct {
 }
 
 // Получение список услуг
-func getServices(typeofmenu, langid string) string {
+func getServices(typeofmenu, langid string) *service {
 	// command=cmd_getservices&TypeOfMenu=2&LanguageID=0
 	// response in file getService.json
 	urlStr := gatewayURL
@@ -258,12 +270,18 @@ func getServices(typeofmenu, langid string) string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'GetService'"
+	serviceStruct := service{}
+	jsonErr := json.Unmarshal(body, &serviceStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	return &serviceStruct
 }
 
 type serviceid struct {
@@ -291,7 +309,7 @@ type serviceid struct {
 }
 
 // Получение инфорамии об услуге по ID
-func getServiceByID(servid string) string {
+func getServiceByID(servid string) *serviceid {
 	// command=cmd_GetServiceByID&GetHandlingWPorWU=1&ServiceID=289&GetWaitingCountPerWPOrWU=1
 	// response in file getServiceByID.json
 
@@ -315,12 +333,18 @@ func getServiceByID(servid string) string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'getServiceByID'"
+	serviceidStruct := serviceid{}
+	jsonErr := json.Unmarshal(body, &serviceidStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	return &serviceidStruct
 }
 
 // Получение конфигурации
@@ -369,7 +393,7 @@ type getTickStp struct {
 }
 
 // Получение списка талонов
-func getTicketSteps(state string) string {
+func getTicketSteps(state string) *getTickStp {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
 	// response
 	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
@@ -393,12 +417,18 @@ func getTicketSteps(state string) string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'GetTicketSteps'"
+	getTickStpStruct := getTickStp{}
+	jsonErr := json.Unmarshal(body, &getTickStpStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	return &getTickStpStruct
 }
 
 type getSRTickStp struct {
@@ -408,7 +438,7 @@ type getSRTickStp struct {
 }
 
 // Получение списка талонов по предварительной записи
-func getSRTicketSteps(srdata string) string {
+func getSRTicketSteps(srdata string) *getSRTickStp {
 	// command=cmd_GetSRTicketSteps&SRDate=02.05.2019
 	// response
 	// {"Command":"cmd_GetSRTicketSteps","SRTicketSteps":[],"ResultCode":"0"}
@@ -435,12 +465,18 @@ func getSRTicketSteps(srdata string) string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'getSRTicketSteps'"
+	getSRTickStpStruct := getSRTickStp{}
+	jsonErr := json.Unmarshal(body, &getSRTickStpStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	return &getSRTickStpStruct
 }
 
 type getLan struct {
@@ -454,7 +490,7 @@ type getLan struct {
 }
 
 // Получение еастройки языка
-func getLanguages() string {
+func getLanguages() *getLan {
 	// command=cmd_GetLanguages
 	// response
 	// {"Command":"cmd_GetLanguages","Languages":[{"ID":"0","Name":"Русский","ShortName":"RUS"}],"ResultCode":"0"}
@@ -476,12 +512,18 @@ func getLanguages() string {
 	//print response
 	fmt.Println(resp.Status)
 
-	body, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println("response Body:", string(body))
+	body, readErr := ioutil.ReadAll(resp.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
 
-	respons := "'Command':'getLanguages'"
+	getLanStruct := getLan{}
+	jsonErr := json.Unmarshal(body, &getLanStruct)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
 
-	return respons
+	return &getLanStruct
 }
 
 // Получение списка пользователей

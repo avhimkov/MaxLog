@@ -34,7 +34,8 @@ func indexPagePost(c *gin.Context) {
 	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
 	// "SourceKind":"1","State":"0","ServiceID":"190","RegTime":"08.05.2019 14:14:40","CallTime":"01.01.2000","PriorityID":"0","QualityMark":"0"}],"ResultCode":"0"}
 
-	c.HTML(http.StatusOK, "terminal.html", gin.H{"tiketList": tiketList})
+	// c.HTML(http.StatusOK, "terminal.html", gin.H{"tiketList": tiketList})
+	c.JSON(http.StatusOK, tiketList)
 	fmt.Println(tiketList)
 
 }
