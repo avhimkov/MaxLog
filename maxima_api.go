@@ -42,6 +42,7 @@ type reg struct {
 	RegDateTime string `json:"RegDateTime"`
 	QNT         string `json:"QNT"`
 	WaitTime    string `json:"WaitTime"`
+	ResultCode  string `json:"ResultCode"`
 }
 
 // Регистрация талона
