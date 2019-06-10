@@ -244,12 +244,29 @@ type service struct {
 		Name           string `json:"Name"`
 		NeedPriorityID string `json:"NeedPriorityID"`
 		ParentID       string `json:"ParentID"`
+		Services       struct {
+			ID                   string `json:"ID"`
+			ShowElement          string `json:"ShowElement"`
+			SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
+			Visible              string `json:"Visible"`
+			Type                 string `json:"Type"`
+			OrderNum             string `json:"OrderNum"`
+			AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+			OnlyForSR            string `json:"OnlyForSR"`
+			QueueID              string `json:"QueueID"`
+			Name                 string `json:"Name"`
+			ParentID             string `json:"ParentID"`
+			State                string `json:"State"`
+			NeedPriorityID       string `json:"NeedPriorityID"`
+			NeedRate             string `json:"NeedRate"`
+			OfferToOtherBranches string `json:"OfferToOtherBranches"`
+		}
 	}
 	ResultCode string `json:"ResultCode"`
 }
 
 // Получение список услуг
-func getServices(typeofmenu, langid string) *service {
+func getServices(typeofmenu, langid string) string {
 	// command=cmd_getservices&TypeOfMenu=2&LanguageID=0
 	// response in file getService.json
 	urlStr := gatewayURL
@@ -276,13 +293,13 @@ func getServices(typeofmenu, langid string) *service {
 		log.Fatal(readErr)
 	}
 
-	serviceStruct := service{}
-	jsonErr := json.Unmarshal(body, &serviceStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
+	// serviceStruct := service{}
+	// jsonErr := json.Unmarshal(body, &serviceStruct)
+	// if jsonErr != nil {
+	// 	log.Fatal(jsonErr)
+	// }
 
-	return &serviceStruct
+	return string(body)
 }
 
 type serviceid struct {

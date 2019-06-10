@@ -27,7 +27,11 @@ func indexPageGet(c *gin.Context) {
 
 	serviceList := getServices("2", "0")
 
-	c.HTML(http.StatusOK, "terminal.html", gin.H{"serviceList": serviceList})
+	/* for _, i := range listusers {
+		cheked = append(cheked, userstate.IsAdmin(i))
+	} */
+	fmt.Println(serviceList)
+	c.HTML(http.StatusOK, "terminal.html", gin.H{})
 	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
 }
 
