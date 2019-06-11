@@ -25,12 +25,17 @@ func indexPageGet(c *gin.Context) {
 	// register(serviceid, fio, comment, "0", "")
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
 
-	serviceList := getServices("2", "0")
-
+	// serviceList := getServices("2", "0")
 	/* for _, i := range listusers {
 		cheked = append(cheked, userstate.IsAdmin(i))
 	} */
-	fmt.Println(serviceList)
+	// fmt.Println(serviceList)
+
+	/* 	SRTicketSteps := getSRTicketSteps("02.05.2019")
+	   	fmt.Println(SRTicketSteps) */
+	workplaces := getWorkplaces()
+	fmt.Println(workplaces)
+
 	c.HTML(http.StatusOK, "terminal.html", gin.H{})
 	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
 }
