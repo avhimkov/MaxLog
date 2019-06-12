@@ -182,21 +182,22 @@ func srReg(servid, custdata, note, priorid, calltime string) *srRegister {
 	return &srRegisterStruct
 }
 
-type workplace struct {
+type Workplaces []struct {
+	ID      string `json:"ID"`
+	Name    string `json:"Name"`
+	PlaceNo string `json:"PlaceNo"`
+	IDCon   string `json:"IDCon"`
+	Active  string `json:"Active"`
+	State   string `json:"State"`
+}
+type Workplace struct {
 	Command    string `json:"Command"`
-	Workplaces struct {
-		ID      string `json:"ID"`
-		Name    string `json:"Name"`
-		PlaceNo string `json:"PlaceNo"`
-		IDCon   string `json:"IDCon"`
-		Active  string `json:"Active"`
-		State   string `json:"State"`
-	}
+	Workplaces Workplaces
 	ResultCode string `json:"ResultCode"`
 }
 
 // Получение рабочие места
-func getWorkplaces() *workplace {
+func getWorkplaces() *Workplace {
 	// command=cmd_GetWorkplaces
 
 	// gatewayURL := maxima()
@@ -222,7 +223,7 @@ func getWorkplaces() *workplace {
 		log.Fatal(readErr)
 	}
 
-	workplaceStruct := workplace{}
+	workplaceStruct := Workplace{}
 	jsonErr := json.Unmarshal(body, &workplaceStruct)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
@@ -231,7 +232,7 @@ func getWorkplaces() *workplace {
 	return &workplaceStruct
 }
 
-type Groups struct {
+type Groups []struct {
 	ID             string `json:"ID"`
 	Visible        string `json:"Visible"`
 	Type           string `json:"Type"`
@@ -257,7 +258,7 @@ type service struct {
 		NeedPriorityID string `json:"NeedPriorityID"`
 		ParentID       string `json:"ParentID"`
 		Groups         Groups `json:"Groups"`
-		Services       struct {
+		Services       []struct {
 			ID                   string `json:"ID"`
 			ShowElement          string `json:"ShowElement"`
 			SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
@@ -321,17 +322,17 @@ type serviceid struct {
 	Service struct {
 		Name string `json:"Name"`
 	}
-	HandlingWP struct {
+	HandlingWP []struct {
 		ID                string `json:"ID"`
 		Name              string `json:"Name"`
 		Active            string `json:"Active"`
 		BlockedForRegTurn string `json:"BlockedForRegTurn"`
 		BlockedForRegSR   string `json:"BlockedForRegSR"`
 	}
-	Schedule struct {
+	Schedule []struct {
 		StartDate string `json:"StartDate"`
 		EndDate   string `json:"EndDate"`
-		Days      struct {
+		Days      []struct {
 			Day       string `json:"Day"`
 			StartTime string `json:"StartTime"`
 			EndTime   string `json:"EndTime"`
