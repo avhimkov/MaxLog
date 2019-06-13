@@ -233,20 +233,10 @@ func getWorkplaces() *Workplace {
 }
 
 type Groups []struct {
-	ID             string `json:"ID"`
-	Visible        string `json:"Visible"`
-	Type           string `json:"Type"`
-	Level          string `json:"Level"`
-	ShowElement    string `json:"ShowElement"`
-	SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
-	OrderNum       string `json:"OrderNum"`
-	Name           string `json:"Name"`
-	NeedPriorityID string `json:"NeedPriorityID"`
-	ParentID       string `json:"ParentID"`
 }
 type service struct {
 	Command string `json:"Command"`
-	Groups  struct {
+	Groups  []struct {
 		ID             string `json:"ID"`
 		Visible        string `json:"Visible"`
 		Type           string `json:"Type"`
@@ -257,23 +247,46 @@ type service struct {
 		Name           string `json:"Name"`
 		NeedPriorityID string `json:"NeedPriorityID"`
 		ParentID       string `json:"ParentID"`
-		Groups         Groups `json:"Groups"`
-		Services       []struct {
-			ID                   string `json:"ID"`
-			ShowElement          string `json:"ShowElement"`
-			SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
-			Visible              string `json:"Visible"`
-			Type                 string `json:"Type"`
-			OrderNum             string `json:"OrderNum"`
-			AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-			OnlyForSR            string `json:"OnlyForSR"`
-			QueueID              string `json:"QueueID"`
-			Name                 string `json:"Name"`
-			ParentID             string `json:"ParentID"`
-			State                string `json:"State"`
-			NeedPriorityID       string `json:"NeedPriorityID"`
-			NeedRate             string `json:"NeedRate"`
-			OfferToOtherBranches string `json:"OfferToOtherBranches"`
+		Groups         []struct {
+			ID             string `json:"ID"`
+			Visible        string `json:"Visible"`
+			Type           string `json:"Type"`
+			Level          string `json:"Level"`
+			ShowElement    string `json:"ShowElement"`
+			SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
+			OrderNum       string `json:"OrderNum"`
+			Name           string `json:"Name"`
+			NeedPriorityID string `json:"NeedPriorityID"`
+			ParentID       string `json:"ParentID"`
+			Groups         []struct {
+				ID             string `json:"ID"`
+				Visible        string `json:"Visible"`
+				Type           string `json:"Type"`
+				Level          string `json:"Level"`
+				ShowElement    string `json:"ShowElement"`
+				SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
+				OrderNum       string `json:"OrderNum"`
+				Name           string `json:"Name"`
+				NeedPriorityID string `json:"NeedPriorityID"`
+				ParentID       string `json:"ParentID"`
+				Services       []struct {
+					ID                   string `json:"ID"`
+					ShowElement          string `json:"ShowElement"`
+					SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
+					Visible              string `json:"Visible"`
+					Type                 string `json:"Type"`
+					OrderNum             string `json:"OrderNum"`
+					AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+					OnlyForSR            string `json:"OnlyForSR"`
+					QueueID              string `json:"QueueID"`
+					Name                 string `json:"Name"`
+					ParentID             string `json:"ParentID"`
+					State                string `json:"State"`
+					NeedPriorityID       string `json:"NeedPriorityID"`
+					NeedRate             string `json:"NeedRate"`
+					OfferToOtherBranches string `json:"OfferToOtherBranches"`
+				}
+			}
 		}
 	}
 	ResultCode string `json:"ResultCode"`
@@ -410,7 +423,7 @@ func getConfig() string {
 
 type getTickStp struct {
 	Command     string `json:"Command"`
-	TicketSteps struct {
+	TicketSteps []struct {
 		TicketStepID string `json:"TicketStepID"`
 		TicketNo     string `json:"TicketNo"`
 		CustID       string `json:"CustID"`
@@ -514,7 +527,7 @@ func getSRTicketSteps(srdata string) *getSRTickStp {
 
 type getLan struct {
 	Command   string `json:"Command"`
-	Languages struct {
+	Languages []struct {
 		ID        string `json:"ID"`
 		Name      string `json:"Name"`
 		ShortName string `json:"ShortName"`

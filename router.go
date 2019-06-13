@@ -34,14 +34,24 @@ func indexPageGet(c *gin.Context) {
 	/* 	SRTicketSteps := getSRTicketSteps("02.05.2019")
 	fmt.Println(SRTicketSteps) */
 
-	getServices := getServices("2", "0")
-	fmt.Println(getServices)
+	/* 	getServices := getServices("2", "0")
+	fmt.Println(getServices) */
 
 	/* 	workplaces := getWorkplaces()
 	fmt.Println(workplaces) */
 
-	/* 	getServiceByID := getServiceByID("289")
-	   	fmt.Println(getServiceByID) */
+	/* getServiceByID := getServiceByID("289")
+	fmt.Println(getServiceByID) */
+
+	/* 	getTicketSteps := getTicketSteps("0,5,6")
+	   	fmt.Println(getTicketSteps) */
+
+	/* 	getLanguages := getLanguages()
+	   	fmt.Println(getLanguages) */
+
+	// no tested
+	/* getGetWorkusers := getGetWorkusers()
+	fmt.Println(getGetWorkusers) */
 
 	c.HTML(http.StatusOK, "terminal.html", gin.H{})
 	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
