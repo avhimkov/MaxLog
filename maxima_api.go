@@ -35,18 +35,8 @@ func maxima() string {
 	return uri
 }
 
-type reg struct {
-	Command     string `json:"Command"`
-	Number      string `json:"Number"`
-	CustID      string `json:"CustID"`
-	RegDateTime string `json:"RegDateTime"`
-	QNT         string `json:"QNT"`
-	WaitTime    string `json:"WaitTime"`
-	ResultCode  string `json:"ResultCode"`
-}
-
 // Регистрация талона
-func Register(serid, custdata, note, priorid, toid string) *reg {
+func Register(serid, custdata, note, priorid, toid string) string {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
 	// response
 	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
@@ -78,18 +68,17 @@ func Register(serid, custdata, note, priorid, toid string) *reg {
 	if readErr != nil {
 		log.Fatal(readErr)
 	}
-	// fmt.Println("response Body:", string(body))
 
-	regStruct := reg{}
-	jsonErr := json.Unmarshal(body, &regStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
+	// regStruct := reg{}
+	// jsonErr := json.Unmarshal(body, &regStruct)
+	// if jsonErr != nil {
+	// 	log.Fatal(jsonErr)
+	// }
 
 	// fmt.Println(reg1.Number)
 	// respons := "'Command':'cmd_Register'"
 
-	return &regStruct
+	return string(body)
 }
 
 // Регистрация нескольких талонов
@@ -123,23 +112,14 @@ func multiRegisters(servcount, langid, custdata, note string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'multiRegisters'"
+	// respons := "'Command':'multiRegisters'"
 
-	return respons
+	return string(body)
 }
 
 // sr_Register
-type srRegister struct {
-	Command     string `json:"Command"`
-	CheckResult string `json:"CheckResult"`
-	Number      string `json:"Number"`
-	CustID      string `json:"CustID"`
-	RegDateTime string `json:"RegDateTime"`
-	ResultCode  string `json:"ResultCode"`
-}
-
 // Регистрация на предварительную запись
-func srReg(servid, custdata, note, priorid, calltime string) *srRegister {
+func srReg(servid, custdata, note, priorid, calltime string) string {
 	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
 	// response
 	// {"Command":"cmd_SR_Register","CheckResult":"0","Number":"6","CustID":"49462","RegDateTime":"10.05.2019 12:00:00","ResultCode":"0"}
@@ -173,31 +153,11 @@ func srReg(servid, custdata, note, priorid, calltime string) *srRegister {
 		log.Fatal(readErr)
 	}
 
-	srRegisterStruct := srRegister{}
-	jsonErr := json.Unmarshal(body, &srRegisterStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return &srRegisterStruct
-}
-
-type Workplaces []struct {
-	ID      string `json:"ID"`
-	Name    string `json:"Name"`
-	PlaceNo string `json:"PlaceNo"`
-	IDCon   string `json:"IDCon"`
-	Active  string `json:"Active"`
-	State   string `json:"State"`
-}
-type Workplace struct {
-	Command    string `json:"Command"`
-	Workplaces Workplaces
-	ResultCode string `json:"ResultCode"`
+	return string(body)
 }
 
 // Получение рабочие места
-func getWorkplaces() *Workplace {
+func getWorkplaces() string {
 	// command=cmd_GetWorkplaces
 
 	// gatewayURL := maxima()
@@ -223,77 +183,12 @@ func getWorkplaces() *Workplace {
 		log.Fatal(readErr)
 	}
 
-	workplaceStruct := Workplace{}
-	jsonErr := json.Unmarshal(body, &workplaceStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return &workplaceStruct
-}
-
-type Groups []struct {
-}
-type service struct {
-	Command string `json:"Command"`
-	Groups  []struct {
-		ID             string `json:"ID"`
-		Visible        string `json:"Visible"`
-		Type           string `json:"Type"`
-		Level          string `json:"Level"`
-		ShowElement    string `json:"ShowElement"`
-		SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
-		OrderNum       string `json:"OrderNum"`
-		Name           string `json:"Name"`
-		NeedPriorityID string `json:"NeedPriorityID"`
-		ParentID       string `json:"ParentID"`
-		Groups         []struct {
-			ID             string `json:"ID"`
-			Visible        string `json:"Visible"`
-			Type           string `json:"Type"`
-			Level          string `json:"Level"`
-			ShowElement    string `json:"ShowElement"`
-			SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
-			OrderNum       string `json:"OrderNum"`
-			Name           string `json:"Name"`
-			NeedPriorityID string `json:"NeedPriorityID"`
-			ParentID       string `json:"ParentID"`
-			Groups         []struct {
-				ID             string `json:"ID"`
-				Visible        string `json:"Visible"`
-				Type           string `json:"Type"`
-				Level          string `json:"Level"`
-				ShowElement    string `json:"ShowElement"`
-				SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
-				OrderNum       string `json:"OrderNum"`
-				Name           string `json:"Name"`
-				NeedPriorityID string `json:"NeedPriorityID"`
-				ParentID       string `json:"ParentID"`
-				Services       []struct {
-					ID                   string `json:"ID"`
-					ShowElement          string `json:"ShowElement"`
-					SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
-					Visible              string `json:"Visible"`
-					Type                 string `json:"Type"`
-					OrderNum             string `json:"OrderNum"`
-					AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-					OnlyForSR            string `json:"OnlyForSR"`
-					QueueID              string `json:"QueueID"`
-					Name                 string `json:"Name"`
-					ParentID             string `json:"ParentID"`
-					State                string `json:"State"`
-					NeedPriorityID       string `json:"NeedPriorityID"`
-					NeedRate             string `json:"NeedRate"`
-					OfferToOtherBranches string `json:"OfferToOtherBranches"`
-				}
-			}
-		}
-	}
-	ResultCode string `json:"ResultCode"`
+	// return &workplaceStruct
+	return string(body)
 }
 
 // Получение список услуг
-func getServices(typeofmenu, langid string) *service {
+func getServices(typeofmenu, langid string) string {
 	// command=cmd_getservices&TypeOfMenu=2&LanguageID=0
 	// response in file getService.json
 	urlStr := gatewayURL
@@ -320,42 +215,12 @@ func getServices(typeofmenu, langid string) *service {
 		log.Fatal(readErr)
 	}
 
-	serviceStruct := service{}
-	jsonErr := json.Unmarshal(body, &serviceStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	// return string(body)
-	return &serviceStruct
-}
-
-type serviceid struct {
-	Command string `json:"Command"`
-	Service struct {
-		Name string `json:"Name"`
-	}
-	HandlingWP []struct {
-		ID                string `json:"ID"`
-		Name              string `json:"Name"`
-		Active            string `json:"Active"`
-		BlockedForRegTurn string `json:"BlockedForRegTurn"`
-		BlockedForRegSR   string `json:"BlockedForRegSR"`
-	}
-	Schedule []struct {
-		StartDate string `json:"StartDate"`
-		EndDate   string `json:"EndDate"`
-		Days      []struct {
-			Day       string `json:"Day"`
-			StartTime string `json:"StartTime"`
-			EndTime   string `json:"EndTime"`
-		}
-	}
-	ResultCode string `json:"ResultCode"`
+	return string(body)
+	// return &serviceStruct
 }
 
 // Получение инфорамии об услуге по ID
-func getServiceByID(servid string) *serviceid {
+func getServiceByID(servid string) string {
 	// command=cmd_GetServiceByID&GetHandlingWPorWU=1&ServiceID=289&GetWaitingCountPerWPOrWU=1
 	// response in file getServiceByID.json
 
@@ -384,13 +249,7 @@ func getServiceByID(servid string) *serviceid {
 		log.Fatal(readErr)
 	}
 
-	serviceidStruct := serviceid{}
-	jsonErr := json.Unmarshal(body, &serviceidStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return &serviceidStruct
+	return string(body)
 }
 
 // Получение конфигурации
@@ -416,30 +275,11 @@ func getConfig() string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'GetConfig'"
-
-	return respons
-}
-
-type getTickStp struct {
-	Command     string `json:"Command"`
-	TicketSteps []struct {
-		TicketStepID string `json:"TicketStepID"`
-		TicketNo     string `json:"TicketNo"`
-		CustID       string `json:"CustID"`
-		CustData     string `json:"CustData"`
-		SourceKind   string `json:"SourceKind"`
-		State        string `json:"State"`
-		RegTime      string `json:"RegTime"`
-		CallTime     string `json:"CallTime"`
-		PriorityID   string `json:"PriorityID"`
-		QualityMark  string `json:"QualityMark"`
-	}
-	ResultCode string
+	return string(body)
 }
 
 // Получение списка талонов
-func getTicketSteps(state string) *getTickStp {
+func getTicketSteps(state string) string {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
 	// response
 	// {"Command":"cmd_GetTicketSteps","TicketSteps":[{"TicketStepID":"49916","TicketNo":"77","CustID":"49449","CustData":"Ширкина А.П.",
@@ -468,23 +308,11 @@ func getTicketSteps(state string) *getTickStp {
 		log.Fatal(readErr)
 	}
 
-	getTickStpStruct := getTickStp{}
-	jsonErr := json.Unmarshal(body, &getTickStpStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return &getTickStpStruct
-}
-
-type getSRTickStp struct {
-	Command       string `json:"Command"`
-	SRTicketSteps string `json:"SRTicketSteps"`
-	ResultCode    string `json:"ResultCode"`
+	return string(body)
 }
 
 // Получение списка талонов по предварительной записи
-func getSRTicketSteps(srdata string) *getSRTickStp {
+func getSRTicketSteps(srdata string) string {
 	// command=cmd_GetSRTicketSteps&SRDate=02.05.2019
 	// response
 	// {"Command":"cmd_GetSRTicketSteps","SRTicketSteps":[],"ResultCode":"0"}
@@ -516,27 +344,11 @@ func getSRTicketSteps(srdata string) *getSRTickStp {
 		log.Fatal(readErr)
 	}
 
-	getSRTickStpStruct := getSRTickStp{}
-	jsonErr := json.Unmarshal(body, &getSRTickStpStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return &getSRTickStpStruct
-}
-
-type getLan struct {
-	Command   string `json:"Command"`
-	Languages []struct {
-		ID        string `json:"ID"`
-		Name      string `json:"Name"`
-		ShortName string `json:"ShortName"`
-	}
-	ResultCode string `json:"ResultCode	"`
+	return string(body)
 }
 
 // Получение еастройки языка
-func getLanguages() *getLan {
+func getLanguages() string {
 	// command=cmd_GetLanguages
 	// response
 	// {"Command":"cmd_GetLanguages","Languages":[{"ID":"0","Name":"Русский","ShortName":"RUS"}],"ResultCode":"0"}
@@ -563,13 +375,7 @@ func getLanguages() *getLan {
 		log.Fatal(readErr)
 	}
 
-	getLanStruct := getLan{}
-	jsonErr := json.Unmarshal(body, &getLanStruct)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return &getLanStruct
+	return string(body)
 }
 
 // Получение списка пользователей
@@ -610,9 +416,7 @@ func getGetWorkusers(id, name, last, patronimyc string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'getGetWorkusers'"
-
-	return respons
+	return string(body)
 }
 
 // Получение информации о предварительной записи по пинкоду
@@ -643,9 +447,7 @@ func getSRInformationByPIN(pin string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'getSRInformationByPIN'"
-
-	return respons
+	return string(body)
 }
 
 // получение свободной даты на которую можно сделать предварительную запись
@@ -682,9 +484,7 @@ func getIntervals(servid, datefrom, dateto string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'getInterval'"
-
-	return respons
+	return string(body)
 }
 
 // Обнавление статуса талона
@@ -722,9 +522,7 @@ func updateTicketStep(tiketid, state string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'updateTickets'"
-
-	return respons
+	return string(body)
 }
 
 // Обнавление статуса талона предварительной записи
@@ -757,9 +555,7 @@ func srUpdateTicketStep(srticketstepid string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'srUpdateTicketStep'"
-
-	return respons
+	return string(body)
 }
 
 // Удаление талона в предварительной записи
@@ -788,9 +584,7 @@ func srDelTicketStep(srtikcetstepid string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'srDelTicketStep'"
-
-	return respons
+	return string(body)
 }
 
 // Регистрация талона предварительной записи по пин коду
@@ -821,7 +615,5 @@ func srRegisterByPIN(pin string) string {
 	body, _ := ioutil.ReadAll(resp.Body)
 	fmt.Println("response Body:", string(body))
 
-	respons := "'Command':'srRegisterByPIN'"
-
-	return respons
+	return string(body)
 }

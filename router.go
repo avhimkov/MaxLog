@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tidwall/gjson"
 )
 
 func indexPageGet(c *gin.Context) {
@@ -31,14 +32,18 @@ func indexPageGet(c *gin.Context) {
 	} */
 	// fmt.Println(serviceList)
 
-	/* 	SRTicketSteps := getSRTicketSteps("02.05.2019")
-	fmt.Println(SRTicketSteps) */
+	// not work
+	// SRTicketSteps := getSRTicketSteps("02.05.2019")
+	// fmt.Println(SRTicketSteps)
 
-	/* 	getServices := getServices("2", "0")
+	/* getServices := getServices("2", "0")
 	fmt.Println(getServices) */
 
-	/* 	workplaces := getWorkplaces()
-	fmt.Println(workplaces) */
+	workplaces := getWorkplaces()
+	fmt.Println(workplaces)
+
+	value := gjson.Get(workplaces, "Workplaces.#.Name")
+	fmt.Println(value.String())
 
 	/* getServiceByID := getServiceByID("289")
 	fmt.Println(getServiceByID) */
