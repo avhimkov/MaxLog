@@ -8,6 +8,24 @@ import (
 	"github.com/tidwall/gjson"
 )
 
+type Service struct {
+	ID                   string `json:"ID"`
+	ShowElement          string `json:"ShowElement"`
+	SRShowElement        string `json:"SRShowElement"` //SR_ShowElement
+	Visible              string `json:"Visible"`
+	Type                 string `json:"Type"`
+	OrderNum             string `json:"OrderNum"`
+	AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+	OnlyForSR            string `json:"OnlyForSR"`
+	QueueID              string `json:"QueueID"`
+	Name                 string `json:"Name"`
+	ParentID             string `json:"ParentID"`
+	State                string `json:"State"`
+	NeedPriorityID       string `json:"NeedPriorityID"`
+	NeedRate             string `json:"NeedRate"`
+	OfferToOtherBranches string `json:"OfferToOtherBranches"`
+}
+
 func indexPageGet(c *gin.Context) {
 
 	/*
@@ -36,15 +54,32 @@ func indexPageGet(c *gin.Context) {
 	// SRTicketSteps := getSRTicketSteps("02.05.2019")
 	// fmt.Println(SRTicketSteps)
 
-	/* getServices := getServices("2", "0")
-	fmt.Println(getServices) */
+	getServices := getServices("2", "0")
+	// fmt.Println(getServices)
 
-	workplaces := getWorkplaces()
-	fmt.Println(workplaces)
+	type ServiceList []Service
+	result := gjson.Get(getServices, "Services")
+	for _, name := range result.Array() {
+		println(name.String())
+		// ServiceList = name.String()
+	}
 
-	value := gjson.Get(workplaces, "Workplaces.#.Name")
-	fmt.Println(value.String())
+	// resultString := result.String()
+	// ServiceList = resultString
 
+	// result.ForEach(func(key, value gjson.Result) bool {
+	// 	println(value.String())
+	// 	return true // keep iterating
+	// })
+
+	// fmt.Println(value.String())
+
+	/* 	workplaces := getWorkplaces()
+	   	fmt.Println(workplaces)
+
+	   	value := gjson.Get(workplaces, "Workplaces.#.Name")
+	   	fmt.Println(value.String())
+	*/
 	/* getServiceByID := getServiceByID("289")
 	fmt.Println(getServiceByID) */
 
