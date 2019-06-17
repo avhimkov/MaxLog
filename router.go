@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tidwall/gjson"
 )
 
 type Service struct {
@@ -55,14 +54,48 @@ func indexPageGet(c *gin.Context) {
 	// fmt.Println(SRTicketSteps)
 
 	getServices := getServices("2", "0")
+
+	// json.Unmarshal([]byte(received_JSON), &arbitrary_json)
+
+	list := []Service{}
+
+	for _, entry := range getServices {
+		f := Service{
+			ID:                   entry.ID(),
+			ShowElement:          entry.ShowElement(),
+			SRShowElement:        entry.SRShowElement(),
+			Visible:              entry.Visible(),
+			Type:                 entry.Type(),
+			OrderNum:             entry.OrderNum(),
+			AllowWPorWUSelect:    entry.AllowWPorWUSelect(),
+			OnlyForSR:            entry.OnlyForSR(),
+			QueueID:              entry.QueueID(),
+			Name:                 entry.Name(),
+			ParentID:             entry.ParentID(),
+			State:                entry.State(),
+			NeedPriorityID:       entry.NeedPriorityID(),
+			NeedRate:             entry.NeedRate(),
+			OfferToOtherBranches: entry.OfferToOtherBranches(),
+		}
+		list = append(list, f)
+	}
+
+	// output, err := json.Marshal(list)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// log.Println(string(output))
+	//https://gist.github.com/kousik93/6d95c4c4d37d8c731d7b
+	// http://qaru.site/questions/2161532/golang-marshal-osfileinfo-into-json
+
 	// fmt.Println(getServices)
 
-	type ServiceList []Service
-	result := gjson.Get(getServices, "Services")
-	for _, name := range result.Array() {
-		println(name.String())
-		// ServiceList = name.String()
-	}
+	/* 	type ServiceList []Service
+	   	result := gjson.Get(getServices, "Services")
+	   	for _, name := range result.Array() {
+	   		println(name.String())
+	   		// ServiceList = name.String()
+	   	} */
 
 	// resultString := result.String()
 	// ServiceList = resultString
@@ -109,4 +142,47 @@ func indexPagePost(c *gin.Context) {
 	c.HTML(http.StatusOK, "terminal.html", gin.H{})
 	//c.JSON(http.StatusOK, tiketList)
 
+}
+
+func dumpJSON(v interface{}, kn string) {
+	iterMap := func(x map[string]interface{}, root string) {
+		var knf string
+		if root == "root" {
+			knf = "%q:%q"
+		} else {
+			knf = "%s:%q"
+		}
+		for k, v := range x {
+			dumpJSON(v, fmt.Sprintf(knf, root, k))
+		}
+	}
+
+	iterSlice := func(x []interface{}, root string) {
+		var knf string
+		if root == "root" {
+			knf = "%q:[%d]"
+		} else {
+			knf = "%s:[%d]"
+		}
+		for k, v := range x {
+			dumpJSON(v, fmt.Sprintf(knf, root, k))
+		}
+	}
+
+	switch vv := v.(type) {
+	case string:
+		fmt.Printf("%s => (string) %q\n", kn, vv)
+	case bool:
+		fmt.Printf("%s => (bool) %v\n", kn, vv)
+	case float64:
+		fmt.Printf("%s => (float64) %f\n", kn, vv)
+	case map[string]interface{}:
+		fmt.Printf("%s => (map[string]interface{}) ...\n", kn)
+		iterMap(vv, kn)
+	case []interface{}:
+		fmt.Printf("%s => ([]interface{}) ...\n", kn)
+		iterSlice(vv, kn)
+	default:
+		fmt.Printf("%s => (unknown?) ...\n", kn)
+	}
 }
