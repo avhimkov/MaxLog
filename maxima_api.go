@@ -35,6 +35,16 @@ func maxima() string {
 	return uri
 }
 
+type reg struct {
+	Command     string `json:"Command"`
+	Number      string `json:"Number"`
+	CustID      string `json:"CustID"`
+	RegDateTime string `json:"RegDateTime"`
+	QNT         string `json:"QNT"`
+	WaitTime    string `json:"WaitTime"`
+	ResultCode  string `json:"ResultCode"`
+}
+
 // Регистрация талона
 func Register(serid, custdata, note, priorid, toid string) string {
 	// command=cmd_Register&ServiceID=289&CustData=dfgdgdfgdfgdfgdfg&Note=&PriorityID=0
@@ -118,6 +128,15 @@ func multiRegisters(servcount, langid, custdata, note string) string {
 }
 
 // sr_Register
+type srRegister struct {
+	Command     string `json:"Command"`
+	CheckResult string `json:"CheckResult"`
+	Number      string `json:"Number"`
+	CustID      string `json:"CustID"`
+	RegDateTime string `json:"RegDateTime"`
+	ResultCode  string `json:"ResultCode"`
+}
+
 // Регистрация на предварительную запись
 func srReg(servid, custdata, note, priorid, calltime string) string {
 	// command=cmd_SR_Register&ServiceID=289&CustData=hjgjghj&Note=&PriorityID=0&CallTime=30.05.2019+8%3A00%3A00
@@ -156,6 +175,20 @@ func srReg(servid, custdata, note, priorid, calltime string) string {
 	return string(body)
 }
 
+type Workplaces []struct {
+	ID      string `json:"ID"`
+	Name    string `json:"Name"`
+	PlaceNo string `json:"PlaceNo"`
+	IDCon   string `json:"IDCon"`
+	Active  string `json:"Active"`
+	State   string `json:"State"`
+}
+type Workplace struct {
+	Command    string `json:"Command"`
+	Workplaces Workplaces
+	ResultCode string `json:"ResultCode"`
+}
+
 // Получение рабочие места
 func getWorkplaces() string {
 	// command=cmd_GetWorkplaces
@@ -185,6 +218,53 @@ func getWorkplaces() string {
 
 	// return &workplaceStruct
 	return string(body)
+}
+
+type Groups []struct {
+	ID             string `json:"ID"`
+	Visible        string `json:"Visible"`
+	Type           string `json:"Type"`
+	Level          string `json:"Level"`
+	ShowElement    string `json:"ShowElement"`
+	SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
+	OrderNum       string `json:"OrderNum"`
+	Name           string `json:"Name"`
+	NeedPriorityID string `json:"NeedPriorityID"`
+	ParentID       string `json:"ParentID"`
+}
+type service struct {
+	Command string `json:"Command"`
+	Groups  struct {
+		ID             string `json:"ID"`
+		Visible        string `json:"Visible"`
+		Type           string `json:"Type"`
+		Level          string `json:"Level"`
+		ShowElement    string `json:"ShowElement"`
+		SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
+		OrderNum       string `json:"OrderNum"`
+		Name           string `json:"Name"`
+		NeedPriorityID string `json:"NeedPriorityID"`
+		ParentID       string `json:"ParentID"`
+		Groups         Groups `json:"Groups"`
+		Services       []struct {
+			ID                   string `json:"ID"`
+			ShowElement          string `json:"ShowElement"`
+			SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
+			Visible              string `json:"Visible"`
+			Type                 string `json:"Type"`
+			OrderNum             string `json:"OrderNum"`
+			AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+			OnlyForSR            string `json:"OnlyForSR"`
+			QueueID              string `json:"QueueID"`
+			Name                 string `json:"Name"`
+			ParentID             string `json:"ParentID"`
+			State                string `json:"State"`
+			NeedPriorityID       string `json:"NeedPriorityID"`
+			NeedRate             string `json:"NeedRate"`
+			OfferToOtherBranches string `json:"OfferToOtherBranches"`
+		}
+	}
+	ResultCode string `json:"ResultCode"`
 }
 
 // Получение список услуг
@@ -217,6 +297,30 @@ func getServices(typeofmenu, langid string) string {
 
 	return string(body)
 	// return &serviceStruct
+}
+
+type serviceid struct {
+	Command string `json:"Command"`
+	Service struct {
+		Name string `json:"Name"`
+	}
+	HandlingWP []struct {
+		ID                string `json:"ID"`
+		Name              string `json:"Name"`
+		Active            string `json:"Active"`
+		BlockedForRegTurn string `json:"BlockedForRegTurn"`
+		BlockedForRegSR   string `json:"BlockedForRegSR"`
+	}
+	Schedule []struct {
+		StartDate string `json:"StartDate"`
+		EndDate   string `json:"EndDate"`
+		Days      []struct {
+			Day       string `json:"Day"`
+			StartTime string `json:"StartTime"`
+			EndTime   string `json:"EndTime"`
+		}
+	}
+	ResultCode string `json:"ResultCode"`
 }
 
 // Получение инфорамии об услуге по ID
@@ -278,6 +382,23 @@ func getConfig() string {
 	return string(body)
 }
 
+type getTickStp struct {
+	Command     string `json:"Command"`
+	TicketSteps struct {
+		TicketStepID string `json:"TicketStepID"`
+		TicketNo     string `json:"TicketNo"`
+		CustID       string `json:"CustID"`
+		CustData     string `json:"CustData"`
+		SourceKind   string `json:"SourceKind"`
+		State        string `json:"State"`
+		RegTime      string `json:"RegTime"`
+		CallTime     string `json:"CallTime"`
+		PriorityID   string `json:"PriorityID"`
+		QualityMark  string `json:"QualityMark"`
+	}
+	ResultCode string
+}
+
 // Получение списка талонов
 func getTicketSteps(state string) string {
 	// command=cmd_GetTicketSteps&State=0%2C5%2C6
@@ -309,6 +430,12 @@ func getTicketSteps(state string) string {
 	}
 
 	return string(body)
+}
+
+type getSRTickStp struct {
+	Command       string `json:"Command"`
+	SRTicketSteps string `json:"SRTicketSteps"`
+	ResultCode    string `json:"ResultCode"`
 }
 
 // Получение списка талонов по предварительной записи
@@ -345,6 +472,16 @@ func getSRTicketSteps(srdata string) string {
 	}
 
 	return string(body)
+}
+
+type getLan struct {
+	Command   string `json:"Command"`
+	Languages struct {
+		ID        string `json:"ID"`
+		Name      string `json:"Name"`
+		ShortName string `json:"ShortName"`
+	}
+	ResultCode string `json:"ResultCode	"`
 }
 
 // Получение еастройки языка
