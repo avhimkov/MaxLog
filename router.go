@@ -5,25 +5,26 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/tidwall/gjson"
 )
 
-type Service struct {
-	ID                   string `json:"ID"`
-	ShowElement          string `json:"ShowElement"`
-	SRShowElement        string `json:"SRShowElement"` //SR_ShowElement
-	Visible              string `json:"Visible"`
-	Type                 string `json:"Type"`
-	OrderNum             string `json:"OrderNum"`
-	AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-	OnlyForSR            string `json:"OnlyForSR"`
-	QueueID              string `json:"QueueID"`
-	Name                 string `json:"Name"`
-	ParentID             string `json:"ParentID"`
-	State                string `json:"State"`
-	NeedPriorityID       string `json:"NeedPriorityID"`
-	NeedRate             string `json:"NeedRate"`
-	OfferToOtherBranches string `json:"OfferToOtherBranches"`
-}
+// type Service struct {
+// 	ID                   string `json:"ID"`
+// 	ShowElement          string `json:"ShowElement"`
+// 	SRShowElement        string `json:"SRShowElement"` //SR_ShowElement
+// 	Visible              string `json:"Visible"`
+// 	Type                 string `json:"Type"`
+// 	OrderNum             string `json:"OrderNum"`
+// 	AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+// 	OnlyForSR            string `json:"OnlyForSR"`
+// 	QueueID              string `json:"QueueID"`
+// 	Name                 string `json:"Name"`
+// 	ParentID             string `json:"ParentID"`
+// 	State                string `json:"State"`
+// 	NeedPriorityID       string `json:"NeedPriorityID"`
+// 	NeedRate             string `json:"NeedRate"`
+// 	OfferToOtherBranches string `json:"OfferToOtherBranches"`
+// }
 
 func indexPageGet(c *gin.Context) {
 
@@ -57,29 +58,6 @@ func indexPageGet(c *gin.Context) {
 
 	// json.Unmarshal([]byte(received_JSON), &arbitrary_json)
 
-	list := []Service{}
-
-	for _, entry := range getServices {
-		f := Service{
-			ID:                   entry.ID(),
-			ShowElement:          entry.ShowElement(),
-			SRShowElement:        entry.SRShowElement(),
-			Visible:              entry.Visible(),
-			Type:                 entry.Type(),
-			OrderNum:             entry.OrderNum(),
-			AllowWPorWUSelect:    entry.AllowWPorWUSelect(),
-			OnlyForSR:            entry.OnlyForSR(),
-			QueueID:              entry.QueueID(),
-			Name:                 entry.Name(),
-			ParentID:             entry.ParentID(),
-			State:                entry.State(),
-			NeedPriorityID:       entry.NeedPriorityID(),
-			NeedRate:             entry.NeedRate(),
-			OfferToOtherBranches: entry.OfferToOtherBranches(),
-		}
-		list = append(list, f)
-	}
-
 	// output, err := json.Marshal(list)
 	// if err != nil {
 	// 	log.Fatal(err)
@@ -89,14 +67,28 @@ func indexPageGet(c *gin.Context) {
 	// http://qaru.site/questions/2161532/golang-marshal-osfileinfo-into-json
 
 	// fmt.Println(getServices)
+	type ServiceList []Services
 
-	/* 	type ServiceList []Service
+	result := gjson.Get(getServices, "Services.#.ID").Get("Services.#.ShowElement")
+
+	for _, name := range result.Array() {
+		// nameString := name.String()
+		// result = append(result, )
+		println(name.String())
+
+	}
+
+	/* 	type ServiceList []Services
 	   	result := gjson.Get(getServices, "Services")
 	   	for _, name := range result.Array() {
-	   		println(name.String())
-	   		// ServiceList = name.String()
-	   	} */
+	   		ServiceList = append(ServiceList, Services{
+	   			ID: name,
+	   		})
 
+	   		// println(name.String())
+	   		// ServiceList = name.String()
+	   	}
+	*/
 	// resultString := result.String()
 	// ServiceList = resultString
 
