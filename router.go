@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tidwall/gjson"
 )
 
 // type Service struct {
@@ -66,38 +65,8 @@ func indexPageGet(c *gin.Context) {
 	//https://gist.github.com/kousik93/6d95c4c4d37d8c731d7b
 	// http://qaru.site/questions/2161532/golang-marshal-osfileinfo-into-json
 
-	// fmt.Println(getServices)
-	type ServiceList []Services
-
-	result := gjson.Get(getServices, "Services.#.ID").Get("Services.#.ShowElement")
-
-	for _, name := range result.Array() {
-		// nameString := name.String()
-		// result = append(result, )
-		println(name.String())
-
-	}
-
-	/* 	type ServiceList []Services
-	   	result := gjson.Get(getServices, "Services")
-	   	for _, name := range result.Array() {
-	   		ServiceList = append(ServiceList, Services{
-	   			ID: name,
-	   		})
-
-	   		// println(name.String())
-	   		// ServiceList = name.String()
-	   	}
-	*/
 	// resultString := result.String()
 	// ServiceList = resultString
-
-	// result.ForEach(func(key, value gjson.Result) bool {
-	// 	println(value.String())
-	// 	return true // keep iterating
-	// })
-
-	// fmt.Println(value.String())
 
 	/* 	workplaces := getWorkplaces()
 	   	fmt.Println(workplaces)

@@ -140,10 +140,12 @@
                     </script>
                 </thead>
                 <tbody>
+                    {{range $i, $e := .services}}
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td>{{$i}}</td>
+                        <td>{{$e.ID}}</td>
                     </tr>
+                    {{end}}
                 </tbody>
             </table>
         </div>
