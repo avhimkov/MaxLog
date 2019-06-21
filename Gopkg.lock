@@ -17,6 +17,14 @@
   version = "v2.2.1"
 
 [[projects]]
+  digest = "1:b520b55fc1146c5b0eea03b07233f7a3d4a9be985c037c91ea6b82ecb81bd521"
+  name = "github.com/bitly/go-simplejson"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "aabad6e819789e569bd6aabf444c935aa9ba1e44"
+  version = "v0.5.0"
+
+[[projects]]
   digest = "1:3ee1d175a75b911a659fbd860060874c4f503e793c5870d13e5a0ede529a63cf"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
@@ -162,6 +170,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/asdine/storm",
+    "github.com/bitly/go-simplejson",
     "github.com/gin-gonic/gin",
     "github.com/google/go-gcm",
   ]

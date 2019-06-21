@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/bitly/go-simplejson"
 	"github.com/gin-gonic/gin"
 )
 
@@ -55,13 +56,25 @@ func indexPageGet(c *gin.Context) {
 
 	getServices := getServices("2", "0")
 
+	// var stringArray []string
+
+	jsonRequest, _ := simplejson.NewJson([]byte(getServices))
+	for _, doc := range jsonRequest.Get("Services").Get("Name").MustArray() {
+		out := simplejson.New()
+		for k, v := range doc.(map[string]interface{}) {
+			out.Set(k, v)
+			// fmt.Println(k)
+			fmt.Println(v)
+			// stringArray = append(stringArray, string(v))
+		}
+		// b, _ := out.EncodePretty()
+		// fmt.Printf("%s\n", b)
+	}
+
+	// fmt.Println(stringArray)
+
 	// json.Unmarshal([]byte(received_JSON), &arbitrary_json)
 
-	// output, err := json.Marshal(list)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// log.Println(string(output))
 	//https://gist.github.com/kousik93/6d95c4c4d37d8c731d7b
 	// http://qaru.site/questions/2161532/golang-marshal-osfileinfo-into-json
 
