@@ -1,10 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
-	"github.com/bitly/go-simplejson"
 	"github.com/gin-gonic/gin"
 )
 
@@ -54,23 +54,43 @@ func indexPageGet(c *gin.Context) {
 	// SRTicketSteps := getSRTicketSteps("02.05.2019")
 	// fmt.Println(SRTicketSteps)
 
-	getServices := getServices("2", "0")
+	// getServices := getServices("2", "0")
 
-	// var stringArray []string
+	/* 	people1 := Services{}
+	   	err := json.Unmarshal([]byte(getServices), &people1)
+	   	if err != nil {
+	   		fmt.Println(err)
+	   		return
+	   	}
+	   	fmt.Println(people1) */
 
-	jsonRequest, _ := simplejson.NewJson([]byte(getServices))
-	for _, doc := range jsonRequest.Get("Services").Get("Name").MustArray() {
-		out := simplejson.New()
-		for k, v := range doc.(map[string]interface{}) {
-			out.Set(k, v)
-			// fmt.Println(k)
-			fmt.Println(v)
-			// stringArray = append(stringArray, string(v))
-		}
-		// b, _ := out.EncodePretty()
-		// fmt.Printf("%s\n", b)
-	}
+	/* 	var result map[string]interface{}
+	   	json.Unmarshal([]byte(getServices), &result)
+	   	birds := result["Services"].(map[string]interface{})
 
+	   	for key, value := range birds {
+	   		// Each value is an interface{} type, that is type asserted as a string
+	   		fmt.Println(key, value.(string))
+	   	} */
+
+	/* 	var services []Services
+	   	json.Unmarshal([]byte(getServices), &services)
+	   	fmt.Print(services.ID)
+	   	fmt.Printf("Species: %s, Description: %s", services.ID, services.Name) */
+
+	/* 	jsonRequest, _ := simplejson.NewJson([]byte(getServices))
+	   	for _, doc := range jsonRequest.Get("Services").Get("Name").MustArray() {
+	   		out := simplejson.New()
+	   		for k, v := range doc.(map[string]interface{}) {
+	   			out.Set(k, v)
+	   			// fmt.Println(k)
+	   			fmt.Println(v)
+	   			// stringArray = append(stringArray, string(v))
+	   		}
+	   		// b, _ := out.EncodePretty()
+	   		// fmt.Printf("%s\n", b)
+	   	}
+	*/
 	// fmt.Println(stringArray)
 
 	// json.Unmarshal([]byte(received_JSON), &arbitrary_json)
@@ -87,11 +107,16 @@ func indexPageGet(c *gin.Context) {
 	   	value := gjson.Get(workplaces, "Workplaces.#.Name")
 	   	fmt.Println(value.String())
 	*/
-	/* getServiceByID := getServiceByID("289")
-	fmt.Println(getServiceByID) */
 
-	/* 	getTicketSteps := getTicketSteps("0,5,6")
-	   	fmt.Println(getTicketSteps) */
+	/* 	getServiceByID := getServiceByID("289")
+	   	fmt.Println(getServiceByID) */
+
+	getTicketSteps := getTicketSteps("0,5,6")
+
+	var services []GetTickStp
+	json.Unmarshal([]byte(getTicketSteps), &services)
+	fmt.Print(services)
+	fmt.Println(getTicketSteps)
 
 	/* 	getLanguages := getLanguages()
 	   	fmt.Println(getLanguages) */

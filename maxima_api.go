@@ -384,7 +384,7 @@ func getConfig() string {
 	return string(body)
 }
 
-type getTickStp struct {
+type GetTickStp struct {
 	Command     string `json:"Command"`
 	TicketSteps struct {
 		TicketStepID string `json:"TicketStepID"`
@@ -434,7 +434,7 @@ func getTicketSteps(state string) string {
 	return string(body)
 }
 
-type getSRTickStp struct {
+type GetSRTickStp struct {
 	Command       string `json:"Command"`
 	SRTicketSteps string `json:"SRTicketSteps"`
 	ResultCode    string `json:"ResultCode"`
