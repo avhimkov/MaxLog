@@ -35,14 +35,6 @@ func indexPageGet(c *gin.Context) {
 		// push
 		SendGCMToClient("Hello from GCM", "<CLIENT TOKEN>")
 	*/
-	// for _, i := range tiketList {
-	// 	cheked = append(cheked, userstate.IsAdmin(i))
-	// }
-	// fio := c.PostForm("fio")
-	// comment := c.PostForm("comment")
-	// serviceid := c.PostForm("serviceid")
-	// register(serviceid, fio, comment, "0", "")
-	// {"Command":"cmd_Register","Number":"1","CustID":"44167","RegDateTime":"02.05.2019 00:08:51","QNT":"0","WaitTime":"-","ResultCode":"0"}
 
 	// serviceList := getServices("2", "0")
 	/* for _, i := range listusers {
@@ -56,14 +48,6 @@ func indexPageGet(c *gin.Context) {
 
 	// getServices := getServices("2", "0")
 
-	/* 	people1 := Services{}
-	   	err := json.Unmarshal([]byte(getServices), &people1)
-	   	if err != nil {
-	   		fmt.Println(err)
-	   		return
-	   	}
-	   	fmt.Println(people1) */
-
 	/* 	var result map[string]interface{}
 	   	json.Unmarshal([]byte(getServices), &result)
 	   	birds := result["Services"].(map[string]interface{})
@@ -72,31 +56,6 @@ func indexPageGet(c *gin.Context) {
 	   		// Each value is an interface{} type, that is type asserted as a string
 	   		fmt.Println(key, value.(string))
 	   	} */
-
-	/* 	var services []Services
-	   	json.Unmarshal([]byte(getServices), &services)
-	   	fmt.Print(services.ID)
-	   	fmt.Printf("Species: %s, Description: %s", services.ID, services.Name) */
-
-	/* 	jsonRequest, _ := simplejson.NewJson([]byte(getServices))
-	   	for _, doc := range jsonRequest.Get("Services").Get("Name").MustArray() {
-	   		out := simplejson.New()
-	   		for k, v := range doc.(map[string]interface{}) {
-	   			out.Set(k, v)
-	   			// fmt.Println(k)
-	   			fmt.Println(v)
-	   			// stringArray = append(stringArray, string(v))
-	   		}
-	   		// b, _ := out.EncodePretty()
-	   		// fmt.Printf("%s\n", b)
-	   	}
-	*/
-	// fmt.Println(stringArray)
-
-	// json.Unmarshal([]byte(received_JSON), &arbitrary_json)
-
-	//https://gist.github.com/kousik93/6d95c4c4d37d8c731d7b
-	// http://qaru.site/questions/2161532/golang-marshal-osfileinfo-into-json
 
 	// resultString := result.String()
 	// ServiceList = resultString
@@ -113,10 +72,14 @@ func indexPageGet(c *gin.Context) {
 
 	getTicketSteps := getTicketSteps("0,5,6")
 
-	var services []GetTickStp
-	json.Unmarshal([]byte(getTicketSteps), &services)
-	fmt.Print(services)
-	fmt.Println(getTicketSteps)
+	var ticketSteps GetTickStp
+	// var ticketSteps map[string]interface{}
+	// err := json.NewDecoder(strings.NewReader(getTicketSteps)).Decode(&ticketSteps)
+	err := json.Unmarshal([]byte(getTicketSteps), &ticketSteps)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v\n", ticketSteps.TicketSteps[1].TicketStepID)
 
 	/* 	getLanguages := getLanguages()
 	   	fmt.Println(getLanguages) */
@@ -185,3 +148,17 @@ func dumpJSON(v interface{}, kn string) {
 		fmt.Printf("%s => (unknown?) ...\n", kn)
 	}
 }
+
+/* func getRecentMedia(accessToken string, count int) []Media {
+	out := []Media{}
+	bodyString := string(body)
+	for i := 0; i < count; i++ {
+		get := fmt.Sprintf("data.%d.link", i)
+		link := gjson.Get(bodyString, get)
+		get = fmt.Sprintf("data.%d.images.standard_resolution.url", i)
+		source := gjson.Get(bodyString, get)
+		media := Media{Link: link.String(), Source: source.String()}
+		out = append(out, media)
+	}
+	return out
+} */

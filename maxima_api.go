@@ -175,17 +175,16 @@ func srReg(servid, custdata, note, priorid, calltime string) string {
 	return string(body)
 }
 
-type Workplaces []struct {
-	ID      string `json:"ID"`
-	Name    string `json:"Name"`
-	PlaceNo string `json:"PlaceNo"`
-	IDCon   string `json:"IDCon"`
-	Active  string `json:"Active"`
-	State   string `json:"State"`
-}
-type Workplace struct {
+type Workplaces struct {
 	Command    string `json:"Command"`
-	Workplaces Workplaces
+	Workplaces []struct {
+		ID      string `json:"ID"`
+		Name    string `json:"Name"`
+		PlaceNo string `json:"PlaceNo"`
+		IDCon   string `json:"IDCon"`
+		Active  string `json:"Active"`
+		State   string `json:"State"`
+	} `json:"Workplaces"`
 	ResultCode string `json:"ResultCode"`
 }
 
@@ -220,52 +219,78 @@ func getWorkplaces() string {
 	return string(body)
 }
 
-type Groups []struct {
-	ID             string `json:"ID"`
-	Visible        string `json:"Visible"`
-	Type           string `json:"Type"`
-	Level          string `json:"Level"`
-	ShowElement    string `json:"ShowElement"`
-	SRShowElement  string `json:"SR_ShowElement"` //SR_ShowElement
-	OrderNum       string `json:"OrderNum"`
-	Name           string `json:"Name"`
-	NeedPriorityID string `json:"NeedPriorityID"`
-	ParentID       string `json:"ParentID"`
-}
-
-type Services []struct {
-	ID                   string `json:"ID"`
-	ShowElement          string `json:"ShowElement"`
-	SRShowElement        string `json:"SR_ShowElement"` //SR_ShowElement
-	Visible              string `json:"Visible"`
-	Type                 string `json:"Type"`
-	OrderNum             string `json:"OrderNum"`
-	AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-	OnlyForSR            string `json:"OnlyForSR"`
-	QueueID              string `json:"QueueID"`
-	Name                 string `json:"Name"`
-	ParentID             string `json:"ParentID"`
-	State                string `json:"State"`
-	NeedPriorityID       string `json:"NeedPriorityID"`
-	NeedRate             string `json:"NeedRate"`
-	OfferToOtherBranches string `json:"OfferToOtherBranches"`
-}
-type Reg struct {
+type Services struct {
 	Command string `json:"Command"`
-	Groups  struct {
-		ID             string   `json:"ID"`
-		Visible        string   `json:"Visible"`
-		Type           string   `json:"Type"`
-		Level          string   `json:"Level"`
-		ShowElement    string   `json:"ShowElement"`
-		SRShowElement  string   `json:"SR_ShowElement"` //SR_ShowElement
-		OrderNum       string   `json:"OrderNum"`
-		Name           string   `json:"Name"`
-		NeedPriorityID string   `json:"NeedPriorityID"`
-		ParentID       string   `json:"ParentID"`
-		Groups         Groups   `json:"Groups"`
-		Services       Services `json:"Services"`
-	}
+	Groups  []struct {
+		ID             string `json:"ID"`
+		Visible        string `json:"Visible"`
+		Type           string `json:"Type"`
+		Level          string `json:"Level"`
+		ShowElement    string `json:"ShowElement"`
+		SRShowElement  string `json:"SR_ShowElement"`
+		OrderNum       string `json:"OrderNum"`
+		Name           string `json:"Name"`
+		NeedPriorityID string `json:"NeedPriorityID"`
+		ParentID       string `json:"ParentID"`
+		Groups         []struct {
+			ID             string `json:"ID"`
+			Visible        string `json:"Visible"`
+			Type           string `json:"Type"`
+			Level          string `json:"Level"`
+			ShowElement    string `json:"ShowElement"`
+			SRShowElement  string `json:"SR_ShowElement"`
+			OrderNum       string `json:"OrderNum"`
+			Name           string `json:"Name"`
+			NeedPriorityID string `json:"NeedPriorityID"`
+			ParentID       string `json:"ParentID"`
+			Groups         []struct {
+				ID             string `json:"ID"`
+				Visible        string `json:"Visible"`
+				Type           string `json:"Type"`
+				Level          string `json:"Level"`
+				ShowElement    string `json:"ShowElement"`
+				SRShowElement  string `json:"SR_ShowElement"`
+				OrderNum       string `json:"OrderNum"`
+				Name           string `json:"Name"`
+				NeedPriorityID string `json:"NeedPriorityID"`
+				ParentID       string `json:"ParentID"`
+				Services       []struct {
+					ID                   string `json:"ID"`
+					ShowElement          string `json:"ShowElement"`
+					SRShowElement        string `json:"SR_ShowElement"`
+					Visible              string `json:"Visible"`
+					Type                 string `json:"Type"`
+					OrderNum             string `json:"OrderNum"`
+					AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+					OnlyForSR            string `json:"OnlyForSR"`
+					QueueID              string `json:"QueueID"`
+					Name                 string `json:"Name"`
+					ParentID             string `json:"ParentID"`
+					State                string `json:"State"`
+					NeedPriorityID       string `json:"NeedPriorityID"`
+					NeedRate             string `json:"NeedRate"`
+					OfferToOtherBranches string `json:"OfferToOtherBranches"`
+				} `json:"Services"`
+			} `json:"Groups"`
+		} `json:"Groups"`
+	} `json:"Groups"`
+	Services []struct {
+		ID                   string `json:"ID"`
+		ShowElement          string `json:"ShowElement"`
+		SRShowElement        string `json:"SR_ShowElement"`
+		Visible              string `json:"Visible"`
+		Type                 string `json:"Type"`
+		OrderNum             string `json:"OrderNum"`
+		AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+		OnlyForSR            string `json:"OnlyForSR"`
+		QueueID              string `json:"QueueID"`
+		Name                 string `json:"Name"`
+		ParentID             string `json:"ParentID"`
+		State                string `json:"State"`
+		NeedPriorityID       string `json:"NeedPriorityID"`
+		NeedRate             string `json:"NeedRate"`
+		OfferToOtherBranches string `json:"OfferToOtherBranches"`
+	} `json:"Services"`
 	ResultCode string `json:"ResultCode"`
 }
 
@@ -305,14 +330,14 @@ type serviceid struct {
 	Command string `json:"Command"`
 	Service struct {
 		Name string `json:"Name"`
-	}
+	} `json:"Service"`
 	HandlingWP []struct {
 		ID                string `json:"ID"`
 		Name              string `json:"Name"`
 		Active            string `json:"Active"`
 		BlockedForRegTurn string `json:"BlockedForRegTurn"`
 		BlockedForRegSR   string `json:"BlockedForRegSR"`
-	}
+	} `json:"HandlingWP"`
 	Schedule []struct {
 		StartDate string `json:"StartDate"`
 		EndDate   string `json:"EndDate"`
@@ -320,8 +345,8 @@ type serviceid struct {
 			Day       string `json:"Day"`
 			StartTime string `json:"StartTime"`
 			EndTime   string `json:"EndTime"`
-		}
-	}
+		} `json:"Days"`
+	} `json:"Schedule"`
 	ResultCode string `json:"ResultCode"`
 }
 
@@ -386,19 +411,20 @@ func getConfig() string {
 
 type GetTickStp struct {
 	Command     string `json:"Command"`
-	TicketSteps struct {
+	TicketSteps []struct {
 		TicketStepID string `json:"TicketStepID"`
 		TicketNo     string `json:"TicketNo"`
 		CustID       string `json:"CustID"`
 		CustData     string `json:"CustData"`
 		SourceKind   string `json:"SourceKind"`
 		State        string `json:"State"`
+		ServiceID    string `json:"ServiceID"`
 		RegTime      string `json:"RegTime"`
 		CallTime     string `json:"CallTime"`
 		PriorityID   string `json:"PriorityID"`
 		QualityMark  string `json:"QualityMark"`
-	}
-	ResultCode string
+	} `json:"TicketSteps"`
+	ResultCode string `json:"ResultCode"`
 }
 
 // Получение списка талонов
@@ -476,14 +502,14 @@ func getSRTicketSteps(srdata string) string {
 	return string(body)
 }
 
-type getLan struct {
+type GetLang struct {
 	Command   string `json:"Command"`
-	Languages struct {
+	Languages []struct {
 		ID        string `json:"ID"`
 		Name      string `json:"Name"`
 		ShortName string `json:"ShortName"`
-	}
-	ResultCode string `json:"ResultCode	"`
+	} `json:"Languages"`
+	ResultCode string `json:"ResultCode"`
 }
 
 // Получение еастройки языка
