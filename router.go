@@ -8,24 +8,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// type Service struct {
-// 	ID                   string `json:"ID"`
-// 	ShowElement          string `json:"ShowElement"`
-// 	SRShowElement        string `json:"SRShowElement"` //SR_ShowElement
-// 	Visible              string `json:"Visible"`
-// 	Type                 string `json:"Type"`
-// 	OrderNum             string `json:"OrderNum"`
-// 	AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-// 	OnlyForSR            string `json:"OnlyForSR"`
-// 	QueueID              string `json:"QueueID"`
-// 	Name                 string `json:"Name"`
-// 	ParentID             string `json:"ParentID"`
-// 	State                string `json:"State"`
-// 	NeedPriorityID       string `json:"NeedPriorityID"`
-// 	NeedRate             string `json:"NeedRate"`
-// 	OfferToOtherBranches string `json:"OfferToOtherBranches"`
-// }
-
 func indexPageGet(c *gin.Context) {
 
 	/*
@@ -68,18 +50,35 @@ func indexPageGet(c *gin.Context) {
 	*/
 
 	/* 	getServiceByID := getServiceByID("289")
-	   	fmt.Println(getServiceByID) */
+	fmt.Println(getServiceByID) */
+
+	type Users struct {
+		TicketStepID string
+		CallTime     string
+		RegTime      string
+	}
 
 	getTicketSteps := getTicketSteps("0,5,6")
 
 	var ticketSteps GetTickStp
-	// var ticketSteps map[string]interface{}
-	// err := json.NewDecoder(strings.NewReader(getTicketSteps)).Decode(&ticketSteps)
+
 	err := json.Unmarshal([]byte(getTicketSteps), &ticketSteps)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("%+v\n", ticketSteps.TicketSteps[1].TicketStepID)
+	var steps []Users
+	for i := 0; i < len(ticketSteps.TicketSteps); i++ {
+
+		// fmt.Printf("%+v\n", ticketSteps.TicketSteps[i])
+
+		steps = append(steps, Users{
+			TicketStepID: ticketSteps.TicketSteps[i].TicketStepID,
+			CallTime:     ticketSteps.TicketSteps[i].CallTime,
+			RegTime:      ticketSteps.TicketSteps[i].RegTime,
+		})
+
+	}
+	fmt.Printf("%+v\n", steps)
 
 	/* 	getLanguages := getLanguages()
 	   	fmt.Println(getLanguages) */
@@ -148,17 +147,3 @@ func dumpJSON(v interface{}, kn string) {
 		fmt.Printf("%s => (unknown?) ...\n", kn)
 	}
 }
-
-/* func getRecentMedia(accessToken string, count int) []Media {
-	out := []Media{}
-	bodyString := string(body)
-	for i := 0; i < count; i++ {
-		get := fmt.Sprintf("data.%d.link", i)
-		link := gjson.Get(bodyString, get)
-		get = fmt.Sprintf("data.%d.images.standard_resolution.url", i)
-		source := gjson.Get(bodyString, get)
-		media := Media{Link: link.String(), Source: source.String()}
-		out = append(out, media)
-	}
-	return out
-} */
