@@ -176,16 +176,18 @@ func srReg(servid, custdata, note, priorid, calltime string) string {
 }
 
 type Workplaces struct {
-	Command    string `json:"Command"`
-	Workplaces []struct {
-		ID      string `json:"ID"`
-		Name    string `json:"Name"`
-		PlaceNo string `json:"PlaceNo"`
-		IDCon   string `json:"IDCon"`
-		Active  string `json:"Active"`
-		State   string `json:"State"`
-	} `json:"Workplaces"`
-	ResultCode string `json:"ResultCode"`
+	ID      string `json:"ID"`
+	Name    string `json:"Name"`
+	PlaceNo string `json:"PlaceNo"`
+	IDCon   string `json:"IDCon"`
+	Active  string `json:"Active"`
+	State   string `json:"State"`
+}
+
+type GetWorkplaces struct {
+	Command    string       `json:"Command"`
+	Workplaces []Workplaces `json:"Workplaces"`
+	ResultCode string       `json:"ResultCode"`
 }
 
 // Получение рабочие места
@@ -326,28 +328,35 @@ func getServices(typeofmenu, langid string) string {
 	// return &serviceStruct
 }
 
+type Service struct {
+	Name string `json:"Name"`
+}
+
+type HandlingWP struct {
+	ID                string `json:"ID"`
+	Name              string `json:"Name"`
+	Active            string `json:"Active"`
+	BlockedForRegTurn string `json:"BlockedForRegTurn"`
+	BlockedForRegSR   string `json:"BlockedForRegSR"`
+}
+
+type Days struct {
+	Day       string `json:"Day"`
+	StartTime string `json:"StartTime"`
+	EndTime   string `json:"EndTime"`
+}
+
+type Schedule struct {
+	StartDate string `json:"StartDate"`
+	EndDate   string `json:"EndDate"`
+	Days      []Days `json:"Days"`
+}
 type serviceid struct {
-	Command string `json:"Command"`
-	Service struct {
-		Name string `json:"Name"`
-	} `json:"Service"`
-	HandlingWP []struct {
-		ID                string `json:"ID"`
-		Name              string `json:"Name"`
-		Active            string `json:"Active"`
-		BlockedForRegTurn string `json:"BlockedForRegTurn"`
-		BlockedForRegSR   string `json:"BlockedForRegSR"`
-	} `json:"HandlingWP"`
-	Schedule []struct {
-		StartDate string `json:"StartDate"`
-		EndDate   string `json:"EndDate"`
-		Days      []struct {
-			Day       string `json:"Day"`
-			StartTime string `json:"StartTime"`
-			EndTime   string `json:"EndTime"`
-		} `json:"Days"`
-	} `json:"Schedule"`
-	ResultCode string `json:"ResultCode"`
+	Command    string       `json:"Command"`
+	Service    Service      `json:"Service"`
+	HandlingWP []HandlingWP `json:"HandlingWP"`
+	Schedule   []Schedule   `json:"Schedule"`
+	ResultCode string       `json:"ResultCode"`
 }
 
 // Получение инфорамии об услуге по ID
@@ -409,22 +418,24 @@ func getConfig() string {
 	return string(body)
 }
 
+type TicketSteps struct {
+	TicketStepID string `json:"TicketStepID"`
+	TicketNo     string `json:"TicketNo"`
+	CustID       string `json:"CustID"`
+	CustData     string `json:"CustData"`
+	SourceKind   string `json:"SourceKind"`
+	State        string `json:"State"`
+	ServiceID    string `json:"ServiceID"`
+	RegTime      string `json:"RegTime"`
+	CallTime     string `json:"CallTime"`
+	PriorityID   string `json:"PriorityID"`
+	QualityMark  string `json:"QualityMark"`
+}
+
 type GetTickStp struct {
-	Command     string `json:"Command"`
-	TicketSteps []struct {
-		TicketStepID string `json:"TicketStepID"`
-		TicketNo     string `json:"TicketNo"`
-		CustID       string `json:"CustID"`
-		CustData     string `json:"CustData"`
-		SourceKind   string `json:"SourceKind"`
-		State        string `json:"State"`
-		ServiceID    string `json:"ServiceID"`
-		RegTime      string `json:"RegTime"`
-		CallTime     string `json:"CallTime"`
-		PriorityID   string `json:"PriorityID"`
-		QualityMark  string `json:"QualityMark"`
-	} `json:"TicketSteps"`
-	ResultCode string `json:"ResultCode"`
+	Command     string        `json:"Command"`
+	TicketSteps []TicketSteps `json:"TicketSteps"`
+	ResultCode  string        `json:"ResultCode"`
 }
 
 // Получение списка талонов
@@ -502,14 +513,16 @@ func getSRTicketSteps(srdata string) string {
 	return string(body)
 }
 
+type Languages struct {
+	ID        string `json:"ID"`
+	Name      string `json:"Name"`
+	ShortName string `json:"ShortName"`
+}
+
 type GetLang struct {
-	Command   string `json:"Command"`
-	Languages []struct {
-		ID        string `json:"ID"`
-		Name      string `json:"Name"`
-		ShortName string `json:"ShortName"`
-	} `json:"Languages"`
-	ResultCode string `json:"ResultCode"`
+	Command    string      `json:"Command"`
+	Languages  []Languages `json:"Languages"`
+	ResultCode string      `json:"ResultCode"`
 }
 
 // Получение еастройки языка

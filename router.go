@@ -52,11 +52,19 @@ func indexPageGet(c *gin.Context) {
 	/* 	getServiceByID := getServiceByID("289")
 	fmt.Println(getServiceByID) */
 
-	type Users struct {
-		TicketStepID string
-		CallTime     string
-		RegTime      string
-	}
+	// type TicketStepsS struct {
+	// 	TicketStepID string
+	// 	TicketNo     string
+	// 	CustID       string
+	// 	CustData     string
+	// 	SourceKind   string
+	// 	State        string
+	// 	ServiceID    string
+	// 	RegTime      string
+	// 	CallTime     string
+	// 	PriorityID   string
+	// 	QualityMark  string
+	// }
 
 	getTicketSteps := getTicketSteps("0,5,6")
 
@@ -66,15 +74,21 @@ func indexPageGet(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	var steps []Users
+	var steps []TicketSteps
 	for i := 0; i < len(ticketSteps.TicketSteps); i++ {
 
-		// fmt.Printf("%+v\n", ticketSteps.TicketSteps[i])
-
-		steps = append(steps, Users{
+		steps = append(steps, TicketSteps{
 			TicketStepID: ticketSteps.TicketSteps[i].TicketStepID,
-			CallTime:     ticketSteps.TicketSteps[i].CallTime,
+			TicketNo:     ticketSteps.TicketSteps[i].TicketNo,
+			CustID:       ticketSteps.TicketSteps[i].CustID,
+			CustData:     ticketSteps.TicketSteps[i].CustData,
+			SourceKind:   ticketSteps.TicketSteps[i].SourceKind,
+			State:        ticketSteps.TicketSteps[i].State,
+			ServiceID:    ticketSteps.TicketSteps[i].ServiceID,
 			RegTime:      ticketSteps.TicketSteps[i].RegTime,
+			CallTime:     ticketSteps.TicketSteps[i].CallTime,
+			PriorityID:   ticketSteps.TicketSteps[i].PriorityID,
+			QualityMark:  ticketSteps.TicketSteps[i].QualityMark,
 		})
 
 	}
@@ -87,7 +101,7 @@ func indexPageGet(c *gin.Context) {
 	/* getGetWorkusers := getGetWorkusers()
 	fmt.Println(getGetWorkusers) */
 
-	c.HTML(http.StatusOK, "terminal.html", gin.H{})
+	c.HTML(http.StatusOK, "terminal.html", gin.H{"services": steps})
 	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
 }
 

@@ -128,10 +128,19 @@
             <table id="table" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th></th>
                         <th>№</th>
                         <!-- <th data-sortable="true" data-field="User">Оператор</th> -->
-                        <th>Name</th>
+                        <th>TicketStepID</th>
+                        <th>TicketNo</th>
+                        <th>CustID</th>
+                        <th>CustData</th>
+                        <th>SourceKind</th>
+                        <th>State</th>
+                        <th>ServiceID</th>
+                        <th>RegTime</th>
+                        <th>CallTime</th>
+                        <th>PriorityID</th>
+                        <th>QualityMark</th>
                     </tr>
                     <script>
                         function Formatter(value) {
@@ -143,7 +152,17 @@
                     {{range $i, $e := .services}}
                     <tr>
                         <td>{{$i}}</td>
-                        <td>{{$e.ID}}</td>
+                        <td>{{$e.TicketStepID}}</td>
+                        <td>{{$e.TicketNo}}</td>
+                        <td>{{$e.CustID}}</td>
+                        <td>{{$e.CustData}}</td>
+                        <td>{{$e.SourceKind}}</td>
+                        <td>{{$e.State}}</td>
+                        <td>{{$e.ServiceID}}</td>
+                        <td>{{$e.RegTime}}</td>
+                        <td>{{$e.CallTime}}</td>
+                        <td>{{$e.PriorityID}}</td>
+                        <td>{{$e.QualityMark}}</td>
                     </tr>
                     {{end}}
                 </tbody>
@@ -153,12 +172,12 @@
 </div>
 <p></p>
 
-<form enctype="multipart/form-data" class="form1" action="/" method="POST">
+<!-- <form enctype="multipart/form-data" class="form1" action="/" method="POST">
     <button type="submit" class="btn btn-warning" style="width: 100%;">
         Создать
         <i class="fa fa-plus"></i>
     </button>
-</form>
+</form> -->
 
 <script>
     $('#table').tableExport({
