@@ -222,78 +222,70 @@ func getWorkplaces() string {
 }
 
 type Services struct {
-	Command string `json:"Command"`
-	Groups  []struct {
-		ID             string `json:"ID"`
-		Visible        string `json:"Visible"`
-		Type           string `json:"Type"`
-		Level          string `json:"Level"`
-		ShowElement    string `json:"ShowElement"`
-		SRShowElement  string `json:"SR_ShowElement"`
-		OrderNum       string `json:"OrderNum"`
-		Name           string `json:"Name"`
-		NeedPriorityID string `json:"NeedPriorityID"`
-		ParentID       string `json:"ParentID"`
-		Groups         []struct {
-			ID             string `json:"ID"`
-			Visible        string `json:"Visible"`
-			Type           string `json:"Type"`
-			Level          string `json:"Level"`
-			ShowElement    string `json:"ShowElement"`
-			SRShowElement  string `json:"SR_ShowElement"`
-			OrderNum       string `json:"OrderNum"`
-			Name           string `json:"Name"`
-			NeedPriorityID string `json:"NeedPriorityID"`
-			ParentID       string `json:"ParentID"`
-			Groups         []struct {
-				ID             string `json:"ID"`
-				Visible        string `json:"Visible"`
-				Type           string `json:"Type"`
-				Level          string `json:"Level"`
-				ShowElement    string `json:"ShowElement"`
-				SRShowElement  string `json:"SR_ShowElement"`
-				OrderNum       string `json:"OrderNum"`
-				Name           string `json:"Name"`
-				NeedPriorityID string `json:"NeedPriorityID"`
-				ParentID       string `json:"ParentID"`
-				Services       []struct {
-					ID                   string `json:"ID"`
-					ShowElement          string `json:"ShowElement"`
-					SRShowElement        string `json:"SR_ShowElement"`
-					Visible              string `json:"Visible"`
-					Type                 string `json:"Type"`
-					OrderNum             string `json:"OrderNum"`
-					AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-					OnlyForSR            string `json:"OnlyForSR"`
-					QueueID              string `json:"QueueID"`
-					Name                 string `json:"Name"`
-					ParentID             string `json:"ParentID"`
-					State                string `json:"State"`
-					NeedPriorityID       string `json:"NeedPriorityID"`
-					NeedRate             string `json:"NeedRate"`
-					OfferToOtherBranches string `json:"OfferToOtherBranches"`
-				} `json:"Services"`
-			} `json:"Groups"`
-		} `json:"Groups"`
-	} `json:"Groups"`
-	Services []struct {
-		ID                   string `json:"ID"`
-		ShowElement          string `json:"ShowElement"`
-		SRShowElement        string `json:"SR_ShowElement"`
-		Visible              string `json:"Visible"`
-		Type                 string `json:"Type"`
-		OrderNum             string `json:"OrderNum"`
-		AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
-		OnlyForSR            string `json:"OnlyForSR"`
-		QueueID              string `json:"QueueID"`
-		Name                 string `json:"Name"`
-		ParentID             string `json:"ParentID"`
-		State                string `json:"State"`
-		NeedPriorityID       string `json:"NeedPriorityID"`
-		NeedRate             string `json:"NeedRate"`
-		OfferToOtherBranches string `json:"OfferToOtherBranches"`
-	} `json:"Services"`
-	ResultCode string `json:"ResultCode"`
+	ID                   string `json:"ID"`
+	ShowElement          string `json:"ShowElement"`
+	SRShowElement        string `json:"SR_ShowElement"`
+	Visible              string `json:"Visible"`
+	Type                 string `json:"Type"`
+	OrderNum             string `json:"OrderNum"`
+	AllowWPorWUSelect    string `json:"AllowWPorWUSelect"`
+	OnlyForSR            string `json:"OnlyForSR"`
+	QueueID              string `json:"QueueID"`
+	Name                 string `json:"Name"`
+	ParentID             string `json:"ParentID"`
+	State                string `json:"State"`
+	NeedPriorityID       string `json:"NeedPriorityID"`
+	NeedRate             string `json:"NeedRate"`
+	OfferToOtherBranches string `json:"OfferToOtherBranches"`
+}
+
+type Groups3 struct {
+	ID             string     `json:"ID"`
+	Visible        string     `json:"Visible"`
+	Type           string     `json:"Type"`
+	Level          string     `json:"Level"`
+	ShowElement    string     `json:"ShowElement"`
+	SRShowElement  string     `json:"SR_ShowElement"`
+	OrderNum       string     `json:"OrderNum"`
+	Name           string     `json:"Name"`
+	NeedPriorityID string     `json:"NeedPriorityID"`
+	ParentID       string     `json:"ParentID"`
+	Services       []Services `json:"Services"`
+}
+
+type Groups2 struct {
+	ID             string    `json:"ID"`
+	Visible        string    `json:"Visible"`
+	Type           string    `json:"Type"`
+	Level          string    `json:"Level"`
+	ShowElement    string    `json:"ShowElement"`
+	SRShowElement  string    `json:"SR_ShowElement"`
+	OrderNum       string    `json:"OrderNum"`
+	Name           string    `json:"Name"`
+	NeedPriorityID string    `json:"NeedPriorityID"`
+	ParentID       string    `json:"ParentID"`
+	Groups3        []Groups3 `json:"Groups"`
+}
+
+type Groups1 struct {
+	ID             string    `json:"ID"`
+	Visible        string    `json:"Visible"`
+	Type           string    `json:"Type"`
+	Level          string    `json:"Level"`
+	ShowElement    string    `json:"ShowElement"`
+	SRShowElement  string    `json:"SR_ShowElement"`
+	OrderNum       string    `json:"OrderNum"`
+	Name           string    `json:"Name"`
+	NeedPriorityID string    `json:"NeedPriorityID"`
+	ParentID       string    `json:"ParentID"`
+	Groups2        []Groups2 `json:"Groups"`
+}
+
+type GetServices struct {
+	Command    string     `json:"Command"`
+	Groups1    []Groups1  `json:"Groups"`
+	Services   []Services `json:"Services"`
+	ResultCode string     `json:"ResultCode"`
 }
 
 // Получение список услуг

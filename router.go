@@ -52,20 +52,6 @@ func indexPageGet(c *gin.Context) {
 	/* 	getServiceByID := getServiceByID("289")
 	fmt.Println(getServiceByID) */
 
-	// type TicketStepsS struct {
-	// 	TicketStepID string
-	// 	TicketNo     string
-	// 	CustID       string
-	// 	CustData     string
-	// 	SourceKind   string
-	// 	State        string
-	// 	ServiceID    string
-	// 	RegTime      string
-	// 	CallTime     string
-	// 	PriorityID   string
-	// 	QualityMark  string
-	// }
-
 	getTicketSteps := getTicketSteps("0,5,6")
 
 	var ticketSteps GetTickStp
@@ -74,10 +60,10 @@ func indexPageGet(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	var steps []TicketSteps
+	var tiketstep []TicketSteps
 	for i := 0; i < len(ticketSteps.TicketSteps); i++ {
 
-		steps = append(steps, TicketSteps{
+		tiketstep = append(tiketstep, TicketSteps{
 			TicketStepID: ticketSteps.TicketSteps[i].TicketStepID,
 			TicketNo:     ticketSteps.TicketSteps[i].TicketNo,
 			CustID:       ticketSteps.TicketSteps[i].CustID,
@@ -92,7 +78,7 @@ func indexPageGet(c *gin.Context) {
 		})
 
 	}
-	fmt.Printf("%+v\n", steps)
+	fmt.Printf("%+v\n", tiketstep)
 
 	/* 	getLanguages := getLanguages()
 	   	fmt.Println(getLanguages) */
@@ -101,7 +87,7 @@ func indexPageGet(c *gin.Context) {
 	/* getGetWorkusers := getGetWorkusers()
 	fmt.Println(getGetWorkusers) */
 
-	c.HTML(http.StatusOK, "terminal.html", gin.H{"services": steps})
+	c.HTML(http.StatusOK, "terminal.html", gin.H{"services": tiketstep})
 	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
 }
 
@@ -117,47 +103,4 @@ func indexPagePost(c *gin.Context) {
 	c.HTML(http.StatusOK, "terminal.html", gin.H{})
 	//c.JSON(http.StatusOK, tiketList)
 
-}
-
-func dumpJSON(v interface{}, kn string) {
-	iterMap := func(x map[string]interface{}, root string) {
-		var knf string
-		if root == "root" {
-			knf = "%q:%q"
-		} else {
-			knf = "%s:%q"
-		}
-		for k, v := range x {
-			dumpJSON(v, fmt.Sprintf(knf, root, k))
-		}
-	}
-
-	iterSlice := func(x []interface{}, root string) {
-		var knf string
-		if root == "root" {
-			knf = "%q:[%d]"
-		} else {
-			knf = "%s:[%d]"
-		}
-		for k, v := range x {
-			dumpJSON(v, fmt.Sprintf(knf, root, k))
-		}
-	}
-
-	switch vv := v.(type) {
-	case string:
-		fmt.Printf("%s => (string) %q\n", kn, vv)
-	case bool:
-		fmt.Printf("%s => (bool) %v\n", kn, vv)
-	case float64:
-		fmt.Printf("%s => (float64) %f\n", kn, vv)
-	case map[string]interface{}:
-		fmt.Printf("%s => (map[string]interface{}) ...\n", kn)
-		iterMap(vv, kn)
-	case []interface{}:
-		fmt.Printf("%s => ([]interface{}) ...\n", kn)
-		iterSlice(vv, kn)
-	default:
-		fmt.Printf("%s => (unknown?) ...\n", kn)
-	}
 }
