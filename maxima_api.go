@@ -553,15 +553,6 @@ func getGetWorkusers(id, name, last, patronimyc string) string {
 	// command=cmd_GetWorkusers
 	// response
 
-	//  // Получение рабочих мест
-	// "cmd_GetWorkusers"
-	// global.workusers[i] = {
-	// 	id: res.WorkUsers[i].ID,
-	// 	name: res.WorkUsers[i].FirstName || "",
-	// 	last: res.WorkUsers[i].LastName || "",
-	// 	second: res.WorkUsers[i].Patronimyc || ""
-	// };
-
 	urlStr := gatewayURL
 
 	// Params

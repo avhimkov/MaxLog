@@ -101,7 +101,7 @@ func main() {
 		userstate.SetAdminStatus("admin")
 	*/
 
-	//init struct in boltdb
+	// init struct in boltdb
 	/*
 		errdbp := db.Init(&Person{})
 		if errdbp != nil {

@@ -19,9 +19,6 @@ func indexPageGet(c *gin.Context) {
 	*/
 
 	// serviceList := getServices("2", "0")
-	/* for _, i := range listusers {
-		cheked = append(cheked, userstate.IsAdmin(i))
-	} */
 	// fmt.Println(serviceList)
 
 	// not work
@@ -30,24 +27,8 @@ func indexPageGet(c *gin.Context) {
 
 	// getServices := getServices("2", "0")
 
-	/* 	var result map[string]interface{}
-	   	json.Unmarshal([]byte(getServices), &result)
-	   	birds := result["Services"].(map[string]interface{})
-
-	   	for key, value := range birds {
-	   		// Each value is an interface{} type, that is type asserted as a string
-	   		fmt.Println(key, value.(string))
-	   	} */
-
 	// resultString := result.String()
 	// ServiceList = resultString
-
-	/* 	workplaces := getWorkplaces()
-	   	fmt.Println(workplaces)
-
-	   	value := gjson.Get(workplaces, "Workplaces.#.Name")
-	   	fmt.Println(value.String())
-	*/
 
 	/* 	getServiceByID := getServiceByID("289")
 	fmt.Println(getServiceByID) */

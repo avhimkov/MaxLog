@@ -35,23 +35,6 @@
             <p></p>
             <div id="jstree">
                 <script>
-                    // $(function() {
-                    //     $.ajax({
-                    //         async: true,
-                    //         type: "GET",
-                    //         url: "/json/datatree.json",
-                    //         dataType: "json",
-                    //         success: function(json) {
-                    //             createJSTree(json);
-                    //         },
-
-                    //         error: function(xhr, ajaxOptions, thrownError) {
-                    //             alert(xhr.status);
-                    //             alert(thrownError);
-                    //         }
-                    //     });
-                    // });
-
                     $(function() {
 
                         $(".search-input").keyup(function() {
@@ -60,14 +43,9 @@
                             $('#jstree').jstree('search', searchString);
                         });
 
-
                         $('#jstree').jstree({
-                            'core': {
-
-
-                            },
+                            'core': {},
                             "search": {
-
                                 "case_insensitive": true,
                                 "show_only_matches": true
                             },
@@ -75,7 +53,6 @@
                         });
                     });
                 </script>
-
             </div>
             <p></p>
             <div class="form-row">
@@ -171,13 +148,6 @@
     </div>
 </div>
 <p></p>
-
-<!-- <form enctype="multipart/form-data" class="form1" action="/" method="POST">
-    <button type="submit" class="btn btn-warning" style="width: 100%;">
-        Создать
-        <i class="fa fa-plus"></i>
-    </button>
-</form> -->
 
 <script>
     $('#table').tableExport({
