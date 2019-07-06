@@ -25,7 +25,24 @@ func indexPageGet(c *gin.Context) {
 	// SRTicketSteps := getSRTicketSteps("02.05.2019")
 	// fmt.Println(SRTicketSteps)
 
-	// getServices := getServices("2", "0")
+	getServices := getServices("2", "0")
+
+	var groups3 Groups3
+
+	err := json.Unmarshal([]byte(getServices), &groups3)
+	if err != nil {
+		panic(err)
+	}
+	var service []Services
+	for i := 0; i < len(groups3.Services); i++ {
+
+		service = append(service, Services{
+			Name: groups3.Services[i].Name,
+			// Name: services.Groups1[i].Groups2[i].Groups3[i].Name,
+		})
+	}
+
+	fmt.Printf("%+v\n", service)
 
 	// resultString := result.String()
 	// ServiceList = resultString
@@ -37,9 +54,9 @@ func indexPageGet(c *gin.Context) {
 
 	var ticketSteps GetTickStp
 
-	err := json.Unmarshal([]byte(getTicketSteps), &ticketSteps)
-	if err != nil {
-		panic(err)
+	err1 := json.Unmarshal([]byte(getTicketSteps), &ticketSteps)
+	if err1 != nil {
+		panic(err1)
 	}
 	var tiketstep []TicketSteps
 	for i := 0; i < len(ticketSteps.TicketSteps); i++ {
@@ -57,7 +74,6 @@ func indexPageGet(c *gin.Context) {
 			PriorityID:   ticketSteps.TicketSteps[i].PriorityID,
 			QualityMark:  ticketSteps.TicketSteps[i].QualityMark,
 		})
-
 	}
 	// fmt.Printf("%+v\n", tiketstep)
 
@@ -68,7 +84,7 @@ func indexPageGet(c *gin.Context) {
 	/* getGetWorkusers := getGetWorkusers()
 	fmt.Println(getGetWorkusers) */
 
-	c.HTML(http.StatusOK, "terminal.html", gin.H{"services": tiketstep})
+	c.HTML(http.StatusOK, "terminal.html", gin.H{"tiketstep": tiketstep, "service": service})
 	// http.Redirect(c.Writer, c.Request, "/terminal", 302)
 }
 
