@@ -42,7 +42,11 @@ func indexPageGet(c *gin.Context) {
 		})
 	}
 
-	fmt.Printf("%+v\n", service)
+	fmt.Println(service)
+
+	// bs, _ := json.Marshal(service)
+	// bsstr := string(bs)
+	// fmt.Println(bsstr)
 
 	// resultString := result.String()
 	// ServiceList = resultString
