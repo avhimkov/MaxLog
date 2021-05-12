@@ -10,7 +10,7 @@
         "@fortawesome/fontawesome-free": "^5.8.2",
         "bootstrap": "^4.3.1",
         "bootstrap-3-typeahead": "^4.0.2",
-        "chart.js": "^2.8.0",
+        "chart.js": "^2.9.4",
         "datatables": "^1.10.18",
         "datatables.net-bs4": "^1.10.19",
         "datatables.net-buttons": "^1.5.6",
